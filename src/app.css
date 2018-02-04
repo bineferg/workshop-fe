@@ -17,6 +17,23 @@
 			margin: 0 auto;
 			padding: 30px;
 		}
+		.outline {
+    outline: 1px solid;
+}
+
+.cf:before, .cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    *zoom: 1;
+}
+
 		.flex {
             display: flex;
         }
@@ -50,6 +67,15 @@
             border-bottom-style: solid;
             border-bottom-width: 1px;
         }
+				.br2 {
+    border-radius: .25rem;
+}
+
+.br--top {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
         .ba {
             border-style: solid;
             border-width: 1px;
@@ -65,7 +91,10 @@
         .fr {
             float: right;
         }
-
+				.fl {
+    			float: left;
+    			_display: inline;
+				}
         .bw2 {
             border-width: .25rem;
         }
@@ -111,6 +140,12 @@
         .measure {
             max-width: 30em;
         }
+				.measure-cb {
+            max-width: 50em;
+        }
+				.measure-cbh {
+						min-height: 20em;
+				}
 
         .pointer:hover {
             cursor: pointer;
@@ -143,6 +178,13 @@
         .dtc {
             display: table-cell;
         }
+				.dt--fixed {
+    table-layout: fixed;
+    width: 100%;
+}
+				.tr {
+    text-align: right;
+}
 
         .tc {
             text-align: center;
@@ -189,6 +231,9 @@
         .mw6 {
             max-width: 40rem;
         }
+				.mw5 {
+    max-width: 16rem;
+}
 
         .w3 {
             width: 10rem;
@@ -197,6 +242,10 @@
         .w-100 {
             width: 100%;
         }
+				.w-50 {
+    width: 50%;
+}
+
 
         .black-60 {
             color: rgba(0, 0, 0, .6);
@@ -224,6 +273,9 @@
         .pb2 {
             padding-bottom: .5rem;
         }
+				.pa2 {
+    padding: .5rem;
+}
         .pa3 {
             padding: 1rem;
         }
@@ -248,6 +300,9 @@
             margin-bottom: 1rem;
         }
 
+				.mt1 {
+				    margin-top: .25rem;
+				}
         .mt2 {
             margin-top: .75rem;
         }
@@ -256,10 +311,26 @@
             margin-top: 0;
             margin-bottom: 0;
         }
+				.mv4 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
         .mt0 {
             margin-top: 0;
         }
+				.ttu {
+    text-transform: uppercase;
+}
 
+.f3 {
+    font-size: 1.5rem;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
         .f6 {
             font-size: .975rem;
         }
@@ -315,6 +386,18 @@
         }
 
         @media screen and (min-width: 30em) {
+					.pb3-ns {
+        padding-bottom: 1rem;
+    }
+
+    .ph3-ns {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .f4-ns {
+        font-size: 1.25rem;
+    }
             .flex-row-ns {
                     flex-direction: row;
                 }
@@ -384,6 +467,7 @@
             text-align: center;
         }
 
+
         .f3 {
             font-size: 1.5rem;
         }
@@ -402,10 +486,14 @@
             .f2-m {
                 font-size: 2.25rem;
             }
+						.w-50-m {
+        width: 50%;
+    }
 
             .f4-m {
                 font-size: 1.25rem;
             }
+
         }
 
         @media screen and (min-width: 60em) {
@@ -416,6 +504,9 @@
             .f3-l {
                 font-size: 1.5rem;
             }
+						.w-20-l {
+        width: 20%;
+    }
         }
         .react-tabs {
           &__tab-list {
