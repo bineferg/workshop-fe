@@ -1,6 +1,8 @@
 import React from 'react';
 import history from '../components/history.js';
 
+const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/mail"
+
 class ContactUsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +15,42 @@ class ContactUsPage extends React.Component {
   newState[e.target.name] = e.target.value;
 
   this.setState(newState);
+  console.log(newState);
+ };
+
+ handleSubmit = (e, comment) => {
+  e.preventDefault();
+  var payload = {
+   FirstName: this.state.firstName,
+   LastName: this.state.lastName,
+   Email: this.state.email,
+   Message: this.state.comment,
+  }
+  console.log(payload)
+
+  var url = backendURL
+  fetch(url, {
+    method: 'POST',
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload)
+    }).then((response) => {
+        if (response.ok) {
+        this.setState({registerSuccess: true})
+        }
+    }).catch (function (error) {
+      console.log('Request failed', error);
+      return;
+    });
+
+  this.setState({
+   firstName:'',
+   lastName:'',
+   email: '',
+   comment:'',
+  });
  };
 
  render(){
@@ -28,7 +66,7 @@ class ContactUsPage extends React.Component {
        <label className="f6 db mb2">Email
        <input id="email" name="email" className="ba b--black-20 pa2 mb2 db w-100" type="email" required onChange={this.handleChange} value={this.state.email} /></label>
          <label className="f6 db mb2">Message </label>
-         <textarea id="comment" name="comment" className="db border-box hover-black w-100 measure-cb measure-cbh ba b--black-20 pa2 br2 mb2" aria-describedby="comment-desc"></textarea>
+         <textarea id="comment" name="comment" className="db border-box hover-black w-100 measure-cb measure-cbh ba b--black-20 pa2 br2 mb2" aria-describedby="comment-desc" onChange={this.handleChange} value={this.state.message}></textarea>
          <small id="comment-desc" className="f6 black-60">Please let us know in a brief message what we can help with. </small>
        <div>
         <input className="ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" />

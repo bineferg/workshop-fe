@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ButtonPill from '../components/ButtonPill.js';
 
 
-const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/signup/"
+const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/mail"
 
 class RegisterForm extends React.Component {
 constructor() {
@@ -28,15 +28,17 @@ handleChange = (e) => {
 
 handleSubmit = (e, message) => {
  e.preventDefault();
+ var msg = "For Workshop: "+ this.props.name+ "\n Message: "+ this.state.comment
  var payload = {
   FirstName: this.state.firstName,
   LastName: this.state.lastName,
   Email: this.state.email,
+  Message: msg,
  }
  console.log(payload)
 
  console.log(this.props.id);
-	var url = backendURL+this.props.id;
+	var url = backendURL;
 	fetch(url, {
 		method: 'POST',
 		headers: {
@@ -61,7 +63,7 @@ handleSubmit = (e, message) => {
 };
 
 render() {
-  
+
  if(this.state.registerSuccess){
 	return <h3>Thanks!</h3>;
  }
@@ -82,7 +84,7 @@ render() {
   <label className="f6 db mb2">Email
   <input id="email" name="email" className="ba b--black-20 pa2 mb2 db w-100" type="email" required onChange={this.handleChange} value={this.state.email} /></label>
     <label className="f6 db mb2">Special Accommodations <span className="normal black-60">(optional)</span></label>
-    <textarea id="comment" name="comment" className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="comment-desc"></textarea>
+    <textarea id="comment" name="comment" className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="comment-desc" onChange={this.handleChange} value={this.state.comment}></textarea>
     <small id="comment-desc" className="f6 black-60">Please let us know if you need special accessibility accommodations. </small>
   <div>
    <input className="ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" />
@@ -96,6 +98,7 @@ render() {
 
 RegisterForm.propTypes = {
 	 id: PropTypes.string,
+   name: PropTypes.string,
 	 isFull: PropTypes.bool,
 	 children: PropTypes.node
 };

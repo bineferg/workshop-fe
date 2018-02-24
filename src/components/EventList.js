@@ -58,7 +58,7 @@ class EventList extends React.Component {
 
             );
 	    }
-		return( 
+		return(
                         <article className="bb b--black-10 db pv4 ph3 ph0-l no-underline black">
                         <div className="flex flex-column flex-row-ns">
                                 <div className="pr3-ns mb4 mb0-ns w-100 w-40-ns">
@@ -100,7 +100,7 @@ render() {
 	return (
 	        <div>
 			<SignUpModal show={this.state.isOpen} name={this.state.name} id={this.state.id} onClose={this.toggleModal}>
-				<RegisterForm id={this.state.id} isFull={this.state.isFull}/>
+				<RegisterForm id={this.state.id} name={this.state.name} isFull={this.state.isFull}/>
 			</SignUpModal>
 			<main className="mw6 center">
 			{this.props.data.map((item) => this.renderItem(item))}
