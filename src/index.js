@@ -12,19 +12,20 @@ import ContactUsPage from './pages/ContactUs.js';
 import history from './components/history.js';
 import './app.css';
 import registerServiceWorker from './registerServiceWorker';
+import homeicon from './assets/icon.png';
 
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render((
    <Router history={history}>
      <div className="avenir">
-     <div className="tc pb3 main-nav">
- 	    <Link to="/" className="link dim gray f6 f5-ns dib mr3">Home</Link>
-    	<Link to="/events" className="link dim gray f6 f5-ns dib mr3">Events</Link>
-    	<Link to="/gear" className="link dim gray f6 f5-ns dib mr3">Gear</Link>
-    	<Link to="/about" className="link dim gray f6 f5-ns dib mr3">About</Link>
-      <Link to="/contact" className="link dim gray f6 f5-ns dib mr3">Contact Us</Link>
+     <Link to="/" className="mt0 fl"><img src={homeicon}/></Link>
+     <div className="tc main-nav">
+      <Link to="/contact" className="link dim gray f6 f5-ns dib mr3 fr">Contact Us</Link>
+      <Link to="/about" className="link dim gray f6 f5-ns dib mr3 fr">About</Link>
+    	<Link to="/gear" className="link dim gray f6 f5-ns dib mr3 fr">Workshop</Link>
+      <Link to="/events" className="link dim gray f6 f5-ns dib mr3 fr">Events</Link>
 	</div>
-        <Switch>
+    <Switch>
     	<Route exact path="/" component={HomePage} />
       <Route path="/gear" component={GearPage} />
     	<Route path="/events" component={EventPage} />

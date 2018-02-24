@@ -1,6 +1,7 @@
 import React from 'react';
 import EventList from '../components/EventList.js';
 import history from '../components/history.js';
+import ErrPage from './ErrPage.js';
 
 /**
  *   */
@@ -12,7 +13,7 @@ class EventPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    history.push('/events')
+    history.push('/events');
  }
 
 shuffleArray(array) {
@@ -28,17 +29,17 @@ shuffleArray(array) {
 
   componentDidMount() {
 	fetch(eventsURL, {
-		headers: { 
-     			'Accept': 'application/json', 
-			'Content-Type': 'application/json' 
-     		}, 
+		headers: {
+     			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+     		},
      		method : 'GET'})
 		.then(d => d.json())
 		.then(d => {
 			this.setState({
 				eventData: d
-			})	
-		})
+			})
+		}).catch(error => this.setState({ err: true}));
 	fetch(workshopURL, {
 		headers: {
      			'Accept': 'application/json',
@@ -50,14 +51,15 @@ shuffleArray(array) {
 			this.setState({
 				workshopData: d
 			})
-		})
+		}).catch(error => this.setState({ err: true}));
    }
-	
+
    render() {
 
-
+  if(this.state.err){
+    return (<ErrPage/>);
+  }
 	if(!this.state.eventData || !this.state.workshopData) return <p>Loading...</p>;
-	//this.setState({eventData: this.state.eventData.events.concat(this.state.workshopData.workshops)})
 	return(
 			   <div>
 			   <center><h1 className="f3 fw1 mt2 lh-title tc">Upcoming Events</h1></center>

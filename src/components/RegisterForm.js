@@ -52,7 +52,7 @@ handleSubmit = (e, message) => {
 			console.log('Request failed', error);
 			return;
 		});
- 
+
  this.setState({
   firstName:'',
   lastName:'',
@@ -61,8 +61,9 @@ handleSubmit = (e, message) => {
 };
 
 render() {
+  
  if(this.state.registerSuccess){
-	return <h3>Thanks!</h3>;	
+	return <h3>Thanks!</h3>;
  }
 
  if(this.props.isFull){

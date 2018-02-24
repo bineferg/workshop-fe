@@ -23,6 +23,8 @@ handleClick = (e) => {
 
 	render(){
 		return (
+      <div>
+      
 		<Tabs>
             <TabList>
               <Tab>Manage Events</Tab>
@@ -40,9 +42,10 @@ handleClick = (e) => {
               <AboutUsPage/>
             </TabPanel>
           </Tabs>
+          </div>
 		);
-		
-	}	
+
+	}
 
 }
 
