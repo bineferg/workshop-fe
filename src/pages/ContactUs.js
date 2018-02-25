@@ -56,9 +56,9 @@ class ContactUsPage extends React.Component {
  render(){
    return (
      <div>
-     <h1 className="f3 fw1 mt2 lh-title tc"> Contact Us</h1>
+     <h1 className="f3 fw1 mt8 tc"> Contact Us</h1>
       <form onSubmit={this.handleSubmit} className="pa4 black-80">
-      <div className="measure center">
+      <div className="measure mb4 center">
        <label className="f6 db mb2">First Name
        <input id="firstName" name="firstName" className="ba b--black-20 pa2 mb2 db w-100" type="text"  required onChange={this.handleChange} value={this.state.firstName} /></label>
        <label className="f6 db mb2">Last Name

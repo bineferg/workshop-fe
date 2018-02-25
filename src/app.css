@@ -16,12 +16,34 @@
      padding: 30px;
 }
 .icon {
-  position: absolute;
-    left: 0;
-    top: 0;
+    max-width: 60px;
+}
+.space {
+  position: relative;
     display: block;
-    height: 125px;
-    width: 150px;
+    max-width: 625px;
+}
+body {
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 6rem;
+  position: relative;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  width: 100%
+}
+.sticky-footer {
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  width: 100%
+}
+.wrkshopImg {
+  max-width: 300px;
+
 }
  .outline {
      outline: 1px solid;
@@ -38,6 +60,37 @@
 }
  .flex {
      display: flex;
+}
+.mw8 {
+    max-width: 64rem;
+}
+.w-33 {
+    width: 33%;
+}
+.w-25 {
+    width: 25%;
+}
+.w-33-l {
+        width: 33%;
+    }
+.w-50 {
+    width: 50%;
+}
+.pr2-l {
+        padding-right: .5rem;
+    }
+    .pr3 {
+      padding-right:5rem;
+    }
+    .pr2 {
+    padding-right: .5rem;
+}
+.mv5 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+.w-third {
+    width: calc(100% / 3);
 }
  .fw1 {
      font-weight: 100;
@@ -158,6 +211,10 @@
  .dib {
      display: inline-block;
 }
+.ph3-l {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
  .b {
      font-weight: bold;
 }
@@ -241,7 +298,7 @@
      color: #777;
 }
  .pl2 {
-     padding-left: .5rem;
+     padding-left: .25rem;
 }
  .pb2 {
      padding-bottom: .5rem;
@@ -249,14 +306,24 @@
  .pa2 {
      padding: .5rem;
 }
+    .pv6 {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
  .pa3 {
      padding: 1rem;
 }
+.pr0-m {
+        padding-right: 0;
+    }
  .pb3 {
      padding-bottom: 2rem;
 }
  .ml0 {
      margin-left: 0;
+}
+.ml1 {
+    margin-left: 1rem;
 }
  .mb0 {
      margin-bottom: 0;
@@ -275,6 +342,18 @@
 }
  .mt2 {
      margin-top: .75rem;
+}
+.mt4 {
+    margin-top: 1.25rem;
+}
+.mb10{
+  margin-bottom: 8rem;
+}
+.mt8 {
+margin-top: 5.25rem;
+}
+.mt5 {
+margin-top: 2.25rem;
 }
  .mv0 {
      margin-top: 0;
@@ -337,11 +416,15 @@
 }
  .main-nav{
      border-bottom:2px solid rgba(0,0,0,0.1);
-     padding-bottom:80px;
-     padding-top:20px
+     padding-bottom:5px;
+     padding-top:5px;
+     background-color: rgba(255, 255, 255, 0.9);
 }
  .cover {
      background-size: cover !important;
+}
+.vh-75 {
+    height: 75vh;
 }
  .bg-center {
      background-repeat: no-repeat;
@@ -350,50 +433,43 @@
  .mb4 {
      margin-bottom: 2rem;
 }
- @media screen and (min-width: 30em) {
+@media screen and (min-width: 30em) {
+    .flex-row-ns {
+        flex-direction: row;
+    }
+    .w-25-ns {
+        width: 25%;
+    }
 
-     .mr5-ns {
-         margin-right: 4rem;
+    .f2-ns {
+        font-size: 2.25rem;
     }
-     .ph3-ns {
-         padding-left: 1rem;
-         padding-right: 1rem;
+
+    .f3-ns {
+        font-size: 1.5rem;
     }
-     .f4-ns {
-         font-size: 1.25rem;
+
+    .w-40-ns {
+        width: 40%;
     }
-     .flex-row-ns {
-         flex-direction: row;
+
+    .w-60-ns {
+        width: 60%;
     }
-     .w-40-ns {
-         width: 40%;
+
+    .pl3-ns {
+        padding-left: 1rem;
     }
-     .w-60-ns {
-         width: 60%;
+
+    .pr3-ns {
+        padding-right: 1rem;
     }
-     .pl3-ns {
-         padding-left: 1rem;
-    }
-     .pr3-ns {
-         padding-right: 1rem;
-    }
-     .mb0-ns {
-         margin-bottom: 0;
-    }
-}
- @media screen and (min-width: 60em) {
-     .ph0-l {
-         padding-left: 0;
-         padding-right: 0;
-    }
-     .f5-l {
-         font-size: 1rem;
-    }
-     .pv6-l {
-         padding-top: 8rem;
-         padding-bottom: 8rem;
+
+    .mb0-ns {
+        margin-bottom: 0;
     }
 }
+
  .fw2 {
      font-weight: 200;
 }
@@ -466,6 +542,31 @@
      .f4-m {
          font-size: 1.25rem;
     }
+
+    .w-100-m {
+        width: 100%;
+    }
+
+    .pl0-m {
+        padding-left: 0;
+    }
+
+    .pr0-m {
+        padding-right: 0;
+    }
+
+    .ph5-m {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+
+    .mt4-m {
+        margin-top: 2rem;
+    }
+
+    .f3-m {
+        font-size: 1.5rem;
+    }
 }
  @media screen and (min-width: 60em) {
      .f1-l {
@@ -476,6 +577,44 @@
     }
      .w-20-l {
          width: 20%;
+    }
+
+    .pl2-l {
+        padding-left: .5rem;
+    }
+    .ph0-l {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .f5-l {
+        font-size: 1rem;
+    }
+
+    .pr2-l {
+        padding-right: .5rem;
+    }
+    .ph3-l {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .ph6-l {
+        padding-left: 8rem;
+        padding-right: 8rem;
+    }
+
+    .f1-l {
+        font-size: 3rem;
+    }
+
+    .f2-l {
+        font-size: 2.25rem;
+    }
+
+    .pv6-l {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
     }
 }
  .react-tabs__tab-list {
