@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactFormLabel from '../components/ReactFormLabel.js';
 import PropTypes from 'prop-types';
-import ButtonPill from '../components/ButtonPill.js';
 
 
 const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/mail"
@@ -65,7 +63,15 @@ handleSubmit = (e, message) => {
 render() {
 
  if(this.state.registerSuccess){
-	return <h3>Thanks!</h3>;
+	return (
+    <div className="mt5">
+    <p className="f5 fw1 lh-title tc">
+    Thanks for signing up!</p>
+    <p className="f5 fw1 lh-title tc">
+     Please bring cash with you to your workshop and we
+    look forward to seeing you. </p>
+    </div>
+  );
  }
 
  if(this.props.isFull){

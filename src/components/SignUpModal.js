@@ -19,7 +19,7 @@ import closeIcon from '../assets/close-icon.png'
 	}
 
 	handleClickOutside(event) {
-		if(event.target.className == "backdrop") {
+		if(event.target.className === "backdrop") {
 			return this.props.onClose(event);
 		}
 	}

@@ -34,7 +34,8 @@ class EventPage extends React.Component {
   if(this.state.err){
     return (<ErrPage/>);
   }
-	if(!this.state.eventData ) return <p>Loading...</p>;
+	if(!this.state.eventData ) return <p></p>;
+  console.log(this.state.eventData);
 	return(
 			   <div>
 				   <EventList data={this.state.eventData.events}/>

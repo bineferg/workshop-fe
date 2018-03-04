@@ -46,7 +46,7 @@ shuffleArray(array) {
   if(this.state.err){
     return (<ErrPage/>);
   }
-	if(!this.state.workshopData) return <p>Loading...</p>;
+	if(!this.state.workshopData) return <p></p>;
 	return(
 			   <div>
 				   <WorkshopList data={this.state.workshopData.workshops}/>
