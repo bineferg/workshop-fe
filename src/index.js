@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
      <div className="tc main-nav sticky">
     <Link to="/" className="no-underline avier black fl"><p className="f-home f2 fw1 mt0 mb0">WORKSHOP</p>
     </Link>
-      <Link to="/contact" className="link  hover-logo-blue black f6 dib mr3 mt4 fr">CONTACT US</Link>
-      <Link to="/space" className="link  hover-logo-green black f6 dib mr3 mt4 fr">THE SPACE</Link>
-      <Link to="/events" className="link  hover-logo-blue black f6 dib mr3 mt4 fr">EXHIBITIONS</Link>
-      <Link to="/workshops" className="link hover-logo-green black f6 dib mr3 mt4 fr">WORKSHOPS</Link>
+      <Link to="/contact" className="link  hover-logo-blue black f6 dib mr2 mt4 fr">CONTACT US</Link>
+      <Link to="/space" className="link  hover-logo-green black f6 dib mr2 mt4 fr">THE SPACE</Link>
+      <Link to="/events" className="link  hover-logo-blue black f6 dib mr2 mt4 fr">EXHIBITIONS</Link>
+      <Link to="/workshops" className="link hover-logo-green black f6 dib mr2 mt4 fr">WORKSHOPS</Link>
 
 	</div>
     <Switch>

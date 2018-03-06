@@ -86,7 +86,7 @@ body {
 
 }
 .eventImg {
-  max-width: 700px;
+  max-width: 45rem;
 }
  .outline {
      outline: 1px solid;
@@ -458,6 +458,9 @@ body {
 }
  .mr3 {
      margin-right: 4rem;
+}
+.mr2 {
+    margin-right: 2.5rem;
 }
 .mr6 {
     margin-right: 6rem;

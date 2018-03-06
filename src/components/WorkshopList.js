@@ -57,7 +57,7 @@ render() {
 
 	return (
 		<section className="mw7 mt10 center avenir">
-		<h2 className="avenir fw1 ph3 ph0-l">Upcoming Workshops</h2>
+		<h2 className="avenir fw1 ph3 ph0-l">Workshops</h2>
 			<SignUpModal show={this.state.isOpen} name={this.state.name} id={this.state.id} onClose={this.toggleModal}>
 				<RegisterForm id={this.state.id} name={this.state.name} isFull={this.state.isFull}/>
 			</SignUpModal>
