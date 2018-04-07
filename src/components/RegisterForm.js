@@ -1,10 +1,12 @@
 import React from 'react';
-import ReactFormLabel from '../components/ReactFormLabel.js';
 import PropTypes from 'prop-types';
-import ButtonPill from '../components/ButtonPill.js';
+import logoBW from '../assets/logo-black-white.jpg';
+import { DatePicker, Icon, Form, Input, TimePicker, Checkbox } from 'antd';
+import moment from 'moment';
 
-
-const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/signup/"
+const FormItem = Form.Item;
+const { TextArea } = Input;
+const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/mail"
 
 class RegisterForm extends React.Component {
 constructor() {
@@ -14,6 +16,7 @@ constructor() {
    firstName: '',
    lastName:'',
    email: ''
+
   }
  }
 
@@ -28,15 +31,17 @@ handleChange = (e) => {
 
 handleSubmit = (e, message) => {
  e.preventDefault();
+ var msg = "For Workshop: "+ this.props.name+ "\n Comment: "+ this.state.comment
  var payload = {
   FirstName: this.state.firstName,
   LastName: this.state.lastName,
   Email: this.state.email,
+  Message: msg,
  }
  console.log(payload)
 
  console.log(this.props.id);
-	var url = backendURL+this.props.id;
+	var url = backendURL;
 	fetch(url, {
 		method: 'POST',
 		headers: {
@@ -57,13 +62,23 @@ handleSubmit = (e, message) => {
   firstName:'',
   lastName:'',
   email: '',
+  comment:'',
  });
 };
 
 render() {
-  
+
  if(this.state.registerSuccess){
-	return <h3>Thanks!</h3>;
+	return (
+    <div>
+    <img className="tc vh-50 db mb0 ml5" src={logoBW} ></img>
+    <p className="f3 fw1 lh-title tc">
+    Thanks for signing up!</p>
+    <p className="f5 fw1 lh-title tc">
+     Please bring cash with you to your workshop and we
+    look forward to seeing you. </p>
+    </div>
+  );
  }
 
  if(this.props.isFull){
@@ -73,22 +88,35 @@ render() {
  }
 
  return(
- <form onSubmit={this.handleSubmit} className="pa4 black-80">
- <div className="measure center">
-  <label className="f6 db mb2">First Name
-  <input id="firstName" name="firstName" className="ba b--black-20 pa2 mb2 db w-100" type="text"  required onChange={this.handleChange} value={this.state.firstName} /></label>
-  <label className="f6 db mb2">Last Name
-  <input id="lastName" name="lastName" className="ba b--black-20 pa2 mb2 db w-100" type="text" required onChange={this.handleChange} value={this.state.lastName} /></label>
-  <label className="f6 db mb2">Email
-  <input id="email" name="email" className="ba b--black-20 pa2 mb2 db w-100" type="email" required onChange={this.handleChange} value={this.state.email} /></label>
-    <label className="f6 db mb2">Special Accommodations <span className="normal black-60">(optional)</span></label>
-    <textarea id="comment" name="comment" className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="comment-desc"></textarea>
-    <small id="comment-desc" className="f6 black-60">Please let us know if you need special accessibility accommodations. </small>
-  <div>
-   <input className="ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" />
-  </div>
-  </div>
- </form>
+
+
+ <Form layout={"vertical"} onSubmit={this.handleSubmit} className="black-80">
+   <div className="measure center dib w-100 ">
+     <div className="f6 db ml3">
+       <FormItem label="First Name" required="true" >
+         <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />} name="firstName" placeholder="First Name" required="true" onChange={this.handleChange} />
+       </FormItem>
+     </div>
+     <div className="f6 db ml3">
+       <FormItem label="Last Name" required="true">
+         <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />} name="lastName" placeholder="Last Name" required="true" onChange={this.handleChange}/>
+       </FormItem>
+     </div>
+     <div className="f6 db ml3">
+       <FormItem label="E-Mail" required="true">
+         <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)'}} />} name="email" placeholder="E-Mail" type="email" required="true" onChange={this.handleChange}/>
+       </FormItem>
+     </div>
+     <div className="f6 db ml3">
+       <FormItem label="Special Requests" name="comments">
+           <TextArea placeholder="Please let us know any of special accommodations. (Optional)" autosize={{ minRows: 4, maxRows: 100 }} onChange={this.handleChange} name="comments"/>
+       </FormItem>
+     </div>
+     <div>
+       <input className="f6 grow plr3 no-underline br-pill fr ph3 pv2 dib bg-white" type="submit" />
+     </div>
+   </div>
+   </Form>
  )
 }
 
@@ -96,6 +124,7 @@ render() {
 
 RegisterForm.propTypes = {
 	 id: PropTypes.string,
+   name: PropTypes.string,
 	 isFull: PropTypes.bool,
 	 children: PropTypes.node
 };

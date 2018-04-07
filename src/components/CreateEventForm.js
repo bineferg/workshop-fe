@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactFormLabel from '../components/ReactFormLabel.js';
-
 const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/events"
 class CreateEventForm extends React.Component {
 	constructor() {
@@ -54,9 +52,9 @@ successSubmit: false,
 				console.log('Request failed', error);
 				return;
 			});
-			
+
 			this.setState({
-			successSubmit: true, 
+			successSubmit: true,
 			name: '',
 			description:'',
 			cost:0,
@@ -73,33 +71,33 @@ render() {
 			<h1>Create Event</h1>
 
 			<fieldset>
-			<ReactFormLabel htmlFor='name' title='Event Name:' />
+
 
 			<input id='formName' className='form-input' name='name' type='text' required onChange={this.handleChange} value={this.state.name} />
 			</fieldset>
 			<fieldset>
-			<ReactFormLabel htmlFor='description' title='Description:' />
+
 
 			<textarea id='formDescription' className='form-textarea' name='description' required onChange={this.handleChange} value={this.state.description}></textarea>
 			</fieldset>
 
 			<fieldset>
-			<ReactFormLabel htmlFor='number' title='Cost:' />
+
 
 			<input id='formcost' className='form-input' name='cost' type='number'step='0.01' required onChange={this.handleChange} value={this.state.cost} />
 			</fieldset>
 			<fieldset>
-			<ReactFormLabel htmlFor='loc' title='Location:' />
+
 
 			<input id='formLocation' className='form-input' name='loc' type='text' required onChange={this.handleChange} value={this.state.loc} />
 			</fieldset>
 			<fieldset>
-			<ReactFormLabel htmlFor='date' title='Date:' />
+
 
 			<input id='formDate' className='form-input' name='date' type='date' required onChange={this.handleChange} value={this.state.date} />
 			</fieldset>
 			<fieldset>
-			<ReactFormLabel htmlFor='time' title='Time:' />
+
 
 			<input id='formTime' className='form-input' name='time' type='time' required onChange={this.handleChange} value={this.state.time} />
 			</fieldset>

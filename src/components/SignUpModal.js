@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import closeIcon from '../assets/close-icon.png'
 
-    class SignUpModal extends React.Component {
+class SignUpModal extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -18,9 +19,9 @@ import PropTypes from 'prop-types';
 	}
 
 	handleClickOutside(event) {
-		if(event.target.className == "backdrop") {
+		if(event.target.className === "backdrop") {
 			return this.props.onClose(event);
-		} 
+		}
 	}
 
 handleCloseClick(event){
@@ -34,11 +35,14 @@ let closeImg = {cursor:'pointer', float:'right', marginTop: '5px', width: '20px'
         console.log(this.props.name)
 		return (
 				<div className="backdrop" >
-				<div className="modal" >
-				<img src='https://d30y9cdsu7xlg0.cloudfront.net/png/53504-200.png' style={closeImg} onClick={this.handleCloseClick}/>
+				<div className="modal " >
+
+				<img src={closeIcon} style={closeImg} onClick={this.handleCloseClick}/>
 				<center><h1 className="f3 fw1 mt0 lh-title tc">{this.props.name}</h1></center>
+
 				{this.props.children}
 				</div>
+
 				</div>
 		 );
 	}
