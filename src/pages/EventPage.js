@@ -13,6 +13,18 @@ class EventPage extends React.Component {
     super(props);
     this.state = {};
     history.push('/events');
+    this.sortEvents = this.sortEvents.bind(this);
+ }
+ sortEvents(events) {
+
+   events.sort(function(a, b) {
+       a = new Date(a.createdAt);
+       b = new Date(b.createdAt);
+       console.log(a.CreatedAt)
+       console.log(b.CreatedAt)
+       return a>b ? -1 : a<b ? 1 : 0;
+   });
+   return events;
  }
 
   componentDidMount() {
@@ -38,7 +50,7 @@ class EventPage extends React.Component {
   console.log(this.state.eventData);
 	return(
 			   <div>
-				   <EventList data={this.state.eventData.events}/>
+				   <EventList data={this.sortEvents(this.state.eventData.events)}/>
 			   </div>
 
 		 );

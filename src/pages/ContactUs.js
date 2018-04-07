@@ -2,9 +2,11 @@ import React from 'react';
 import history from '../components/history.js';
 import tableLamp from '../assets/table-lamp.jpg';
 import ErrPage from '../pages/ErrPage.js';
+import { DatePicker, Icon, Form, Input, TimePicker, Checkbox } from 'antd';
 
 const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/mail"
-
+const FormItem = Form.Item;
+const { TextArea } = Input;
 class ContactUsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -62,7 +64,7 @@ class ContactUsPage extends React.Component {
          <div className="vh-75 cover mt7 bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
          <p className="tc f2 mb4 fw1 avenir ">Contact Us </p>
          <div className="fl w-67 bg-near-white pb3 vh-100">
-           <h1 className="plr5 f2 mb4 fw1 avenir mt10 ">Thanks for your inquiry, we will get back to you shortly!</h1>
+           <h1 className="plr5 f2 mb4 fw1 avenir mt10">Thanks for your inquiry, we will get back to you shortly!</h1>
          </div>
          <div className="fl w-33 pb5 dib vh-100 bg-light-gray tc">
            <h1 className="plr5 f3 mt10 fw3 avenir">Location</h1>
@@ -88,27 +90,40 @@ class ContactUsPage extends React.Component {
   <div className="fl w-67 bg-near-white">
     <h1 className="plr5 f2 mb4 fw1 avenir">Get in Touch</h1>
      <div className="pa5 dark-gray">
-    <form onSubmit={this.handleSubmit} className="black-80">
-     <label className="f6 db mb2">First Name
-     <input id="firstName" name="firstName" className="ba b--black-20 pa2 mb2 db w-80" type="text"  required onChange={this.handleChange} value={this.state.firstName} /></label>
-     <label className="f6 db mb2">Last Name
-     <input id="lastName" name="lastName" className="ba b--black-20 pa2 mb2 db w-80" type="text" required onChange={this.handleChange} value={this.state.lastName} /></label>
-     <label className="f6 db mb2">Email
-     <input id="email" name="email" className="ba b--black-20 pa2 mb2 db w-80" type="email" required onChange={this.handleChange} value={this.state.email} /></label>
-       <label className="f6 db mb2">Message </label>
-       <textarea id="comment" name="comment" className="db border-box hover-black w-80 measure-cb measure-cbh ba b--black-20 pa2 br2 mb2" aria-describedby="comment-desc" onChange={this.handleChange} value={this.state.message}></textarea>
-       <small id="comment-desc" className="f6 black-60">Please let us know in a brief message what we can help with. </small>
-       <div>
-      <input className="ph3 pv2 input-reset ba b--black bg-white grow pointer f6 dib" type="submit" />
-      </div>
-    </form>
+     <Form layout={"vertical"} onSubmit={this.handleSubmit} className="black-80">
+       <div className="measure center dib w-100 ">
+         <div className="f6 db ml3">
+           <FormItem label="First Name" required="true" >
+             <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />} name="firstName" placeholder="First Name" required="true" onChange={this.handleChange} />
+           </FormItem>
+         </div>
+         <div className="f6 db ml3">
+           <FormItem label="Last Name" required="true">
+             <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />} name="lastName" placeholder="Last Name" required="true" onChange={this.handleChange}/>
+           </FormItem>
+         </div>
+         <div className="f6 db ml3">
+           <FormItem label="E-Mail" required="true">
+             <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)'}} />} name="email" placeholder="E-Mail" type="email" required="true" onChange={this.handleChange}/>
+           </FormItem>
+         </div>
+         <div className="f6 db ml3">
+           <FormItem label="Message" name="comments">
+               <TextArea placeholder="..." autosize={{ minRows: 8, maxRows: 100 }} onChange={this.handleChange} name="comments"/>
+           </FormItem>
+         </div>
+         <div>
+           <input className="f6 grow plr3 no-underline br-pill fr ph3 pv2 dib bg-white" type="submit" />
+         </div>
+       </div>
+       </Form>
     </div>
   </div>
-  <div className="fl w-33 pb5 dib vh-100 bg-light-gray tc">
+  <div className="fl w-33 pb10 dib vh-100 bg-light-gray tc">
     <h1 className="plr5 f3 mt10 fw3 avenir">Location</h1>
     <p className="mb4">Forster Strasse 51 <br></br> 10997, Berlin</p>
     <h1 className="plr5 f3 fw3 avenir">Phone</h1>
-    <p className="mb4">T: (1) 234-352-4356</p>
+    <p className="mb4">T: +49 176 61551591</p>
     <h1 className="plr5 f3 fw3 avenir">Social</h1>
     <a className="link tc pr2" href="http://instagram.com">
     <img src="./insta.png" class="foot-icon dib"></img></a>

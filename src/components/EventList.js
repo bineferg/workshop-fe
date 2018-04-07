@@ -7,16 +7,24 @@ class EventList extends React.Component {
 	constructor() {
 		super();
     	this.state = {isOpen: false, name: "", id: ""};
+			this.handleDescription = this.handleDescription.bind(this);
 	}
 
   toggleModal = (name, id, isFull) => {
     		this.setState({
       		isOpen: !this.state.isOpen,
-		name: name,
-		id: id,
-		isFull: isFull
+					name: name,
+					id: id,
+					isFull: isFull
     	});
   	}
+
+		handleDescription(description) {
+			return description.split("[p]").map(p => {
+				return <p>{p}</p>;
+
+			})
+		}
 
 	renderItem(d) {
 		var imgName="https://workshop-objects-1.s3.amazonaws.com/events/"+d.id+".jpg"
@@ -28,12 +36,12 @@ class EventList extends React.Component {
 						</div>
 				<div className="w-100">
 				<h1 className="f3 fw1 tc avenir w-90 mt0 lh-title">{d.name}</h1>
-				<p className="f6 f5-l center w-90 lh-copy">{d.description}</p>
+				<div className="f6 f5-l center w-90 lh-copy">{this.handleDescription(d.description)}</div>
 				<p className="f6 b ml2s f5-l lh-copy w-90 mv0">{d.location}</p>
 				<p className="f6 b ml2s lh-copy w-90 mv0">Price: {d.cost}
 				</p>
-				<p className="f6 b ml2s lh-copy w-90 mb4 mt0">Time: {d.time}
-				</p>
+				<div className="f6 b ml2s lh-copy w-90 mb4 mt0 measure-narrow">Time: {d.time}
+				</div>
 				</div>
 				</div>
 				</article>
@@ -41,12 +49,12 @@ class EventList extends React.Component {
 		      );
 
 		}
-		
+
 render() {
 
 	return (
 		<section className="mw7 mt10 center avenir">
-		<h2 className="avenir fw1 ph3 ph0-l">Exhibitions</h2>
+		<h2 className="avenir fw1 f1-5 mb0 ph3 ph0-l">Exhibitions</h2>
 			<SignUpModal show={this.state.isOpen} name={this.state.name} id={this.state.id} onClose={this.toggleModal}>
 				<RegisterForm id={this.state.id} name={this.state.name} isFull={this.state.isFull}/>
 			</SignUpModal>

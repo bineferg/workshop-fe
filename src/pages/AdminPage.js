@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Route } from 'react-router';
-import EventsAdminPage from './EventsAdminPage.js'
-import WorkshopsAdminPage from './WorkshopsAdminPage.js'
-import AboutUsPage from './AboutUsPage.js'
+import AdminEventList from '../components/AdminEventList.js';
+
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 class AdminPage extends React.Component{
@@ -23,24 +23,36 @@ handleClick = (e) => {
 
 	render(){
 		return (
-      <div>
-      
+      <div className="mt10">
+
 		<Tabs>
             <TabList>
               <Tab>Manage Events</Tab>
               <Tab>Manage Workshops</Tab>
-              <Tab>Manage About </Tab>
             </TabList>
 
             <TabPanel>
-              <EventsAdminPage/>
+            <div>
+            <center>
+              <a class="f6 grow no-underline br-pill ba ph3 pv2 mb2 dib near-black" href="#0">
+                Create Event
+              </a>
+
+            </center>
+            <AdminEventList/>
+            </div>
             </TabPanel>
             <TabPanel>
-              <WorkshopsAdminPage/>
+            <div>
+            <center>
+            <a class="f6 grow no-underline br-pill ba ph3 pv2 mb2 dib near-black" href="#0">
+            Create Workshop
+            </a>
+            </center>
+            </div>
+
             </TabPanel>
-            <TabPanel>
-              <AboutUsPage/>
-            </TabPanel>
+
           </Tabs>
           </div>
 		);

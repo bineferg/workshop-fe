@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import HomePage from './pages/HomePage.js';
+import AdminPage from './pages/AdminPage.js';
 import EventPage from './pages/EventPage.js';
 import WorkshopPage from './pages/WorkshopPage.js';
 import TheSpacePage from './pages/TheSpacePage.js';
+import GearPage from './pages/GearPage.js'
 import { Router, Route, Link, Switch } from 'react-router-dom';
 import ContactUsPage from './pages/ContactUs.js';
 import history from './components/history.js';
@@ -16,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
      <div className="avenir">
 
      <div className="tc main-nav sticky">
-    <Link to="/" className="no-underline avier black fl"><p className="f-home f2 fw1 mt0 mb0">WORKSHOP</p>
+    <Link to="/" className="no-underline avier black fl"><p className="f-home pl3 f2 fw1 mt0 mb0">WORKSHOP</p>
     </Link>
       <Link to="/contact" className="link  hover-logo-blue black f6 dib mr2 mt4 fr">CONTACT US</Link>
       <Link to="/space" className="link  hover-logo-green black f6 dib mr2 mt4 fr">THE SPACE</Link>
@@ -30,6 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <Route path="/workshops" component={WorkshopPage} />
     	<Route path="/space" component={TheSpacePage} />
       <Route path="/contact" component={ContactUsPage}/>
+      <Route path= "/gear" component={GearPage} />
+      <Route path= "/admin" component={AdminPage} />
     	</Switch>
      </div>
    </Router>

@@ -13,6 +13,7 @@ class WorkshopPage extends React.Component {
     super(props);
     this.state = {};
     history.push('/workshops');
+    this.sortWorkshops = this.sortWorkshops.bind(this);
  }
 
 shuffleArray(array) {
@@ -24,6 +25,14 @@ shuffleArray(array) {
     array[j] = temp;
   }
   return array;
+}
+sortWorkshops(workshops) {
+  workshops.sort(function(a, b) {
+      a = new Date(a.CreatedAt);
+      b = new Date(b.CreatedAt);
+      return a>b ? -1 : a<b ? 1 : 0;
+  });
+  return workshops;
 }
 
   componentDidMount() {
@@ -47,9 +56,10 @@ shuffleArray(array) {
     return (<ErrPage/>);
   }
 	if(!this.state.workshopData) return <p></p>;
+
 	return(
 			   <div>
-				   <WorkshopList data={this.state.workshopData.workshops}/>
+				   <WorkshopList data={this.sortWorkshops(this.state.workshopData.workshops)}/>
 			   </div>
 
 		 );

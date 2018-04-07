@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactFormLabel from '../components/ReactFormLabel.js';
+
 
 class CreateEventForm extends React.Component {
 constructor() {
@@ -32,7 +32,7 @@ handleSubmit = (e, message) => {
 
  console.log(formData.formMessage);
  if (formData.formSender="" || formData.formEmail=="" || formData.formSubject=="" || formData.formMessage=="") {
-  	
+
 	return false;
  }
  /*$.ajax({
@@ -50,7 +50,7 @@ handleSubmit = (e, message) => {
    alert('There was some problem with sending your message.');
   }
  });*/
- 
+
  this.setState({
   firstName: '',
   lastName: '',
@@ -65,33 +65,32 @@ render() {
   <h1>Create Workshop</h1>
 
   <fieldset>
-   <ReactFormLabel htmlFor='formName' title='Event Name:' />
+
 
    <input id='formName' className='form-input' name='name' type='text' required onChange={this.handleChange} value={this.state.name} />
   </fieldset>
   <fieldset>
-   <ReactFormLabel htmlFor='formMessage' title='Description:' />
+
 
    <textarea id='formDescription' className='form-textarea' name='message' required onChange={this.handleChange} value={this.state.description}></textarea>
   </fieldset>
 
   <fieldset>
-   <ReactFormLabel htmlFor='formCost' title='Cost:' />
+
 
    <input id='formcost' className='form-input' name='cost' type='cost' required onChange={this.handleChange} value={this.state.cost} />
   </fieldset>
   <fieldset>
-   <ReactFormLabel htmlFor='formLocation' title='Location:' />
+
 
    <input id='formLocation' className='form-input' name='location' type='location' required onChange={this.handleChange} value={this.state.loc} />
   </fieldset>
   <fieldset>
-   <ReactFormLabel htmlFor='formDate' title='Date:' />
 
    <input id='formDate' className='form-input' name='date' type='date' required onChange={this.handleChange} value={this.state.date} />
   </fieldset>
   <fieldset>
-   <ReactFormLabel htmlFor='formTime' title='Time:' />
+
 
    <input id='formTime' className='form-input' name='time' type='time' required onChange={this.handleChange} value={this.state.time} />
   </fieldset>
