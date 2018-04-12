@@ -1,22 +1,21 @@
 import React from 'react';
 import ShowMoreText from 'react-show-more-text';
-import { Form, Input, Upload, Modal, Icon } from 'antd';
+import { Form, Input, Icon, Upload, Modal } from 'antd';
 
-const eventsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/events";
+const workshopURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/workshops"
+const imageURL = "https://workshop-objects-1.s3.amazonaws.com/workshops/";
 const FormItem = Form.Item;
 const { TextArea } = Input;
-const imageURL = "https://workshop-objects-1.s3.amazonaws.com/events/";
 
-class AdminEventList extends React.Component {
+class AdminWorkshopList extends React.Component {
+
   constructor(props) {
 		super(props);
+    this.renderItem = this.renderItem.bind(this);
     this.executeOnClick = this.executeOnClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handlePreview = this.handlePreview.bind(this);
-    this.handleEditField = this.handleEditField.bind(this);
+    this.executeOnClick = this.executeOnClick.bind(this);
     this.toggleEditing = this.toggleEditing.bind(this);
-    this.handleCancelEdit = this.handleCancelEdit.bind(this);
     this.state = {
     previewVisible: false,
     previewImage: '',
@@ -29,13 +28,13 @@ class AdminEventList extends React.Component {
   executeOnClick(isExpanded) {}
 
   handleDelete(id) {
-    /*fetch(eventsURL + '?event_id=' + id, {
+    /*fetch(workshopURL + '?workshop_id=' + id, {
     method: 'delete'
     })
     .then(response => response.json());*/
     console.log(id);
   }
-  /* handle image and upload functionality*/
+
   handleCancel = () => this.setState({ previewVisible: false })
 
   handlePreview = (file) => {
@@ -46,10 +45,6 @@ class AdminEventList extends React.Component {
   }
 
   handleChange = ({ fileList }) => this.state.fileListMap[fileList.uid] = fileList;
-
-  handleCancelEdit(){
-    this.setState({editing:''});
-  }
 
 
   handleEventUpdate( update ) {
@@ -64,7 +59,7 @@ class AdminEventList extends React.Component {
       update.id = this.state.editing;
       update[ target.name ] = target.value;
 
-      this.handleWorkshopUpdate( update );
+      this.handleUpdate( update );
     }
   }
 
@@ -72,12 +67,11 @@ class AdminEventList extends React.Component {
     return this.setState( { editing: itemId } );
   }
 
-
   renderOrEditItem(d){
 
     var previewVisible = this.state.previewVisible;
     var previewImage = this.state.previewImage;
-    const fileList = this.state.fileListMap[d.id];
+    const fileList = this.state.fileListMap[d.WorkshopID];
 
     const uploadButton = (
       <div>
@@ -86,9 +80,9 @@ class AdminEventList extends React.Component {
       </div>
     );
 
-    var imgName=imageURL+d.id+".jpg"
+    var imgName=imageURL+d.WorkshopID+".jpg"
 
-    if ( this.state.editing === d.id ) {
+    if ( this.state.editing === d.WorkshopID ) {
       console.log(this.state.fileListMap);
       return(
       <div>
@@ -99,31 +93,31 @@ class AdminEventList extends React.Component {
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
-              ref={ `title_${ d.id }` }
+              ref={ `title_${ d.WorkshopID }` }
               name="id"
-              defaultValue={ d.id }
+              defaultValue={ d.WorkshopID }
             />
           </div>
-          <div className="dtc w8">
+          <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Title </h1>
             <Input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
-              ref={ `title_${ d.name }` }
+              ref={ `title_${ d.Name }` }
               name="title"
-              defaultValue={ d.name }
+              defaultValue={ d.Name }
             />
           </div>
-          <div className="dtc w8">
+          <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Time </h1>
             <Input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
-              ref={ `title_${ d.time }` }
+              ref={ `title_${ d.Time }` }
               name="title"
-              defaultValue={ d.time }
+              defaultValue={ d.Time }
             />
           </div>
           <div className="dtc">
@@ -132,9 +126,20 @@ class AdminEventList extends React.Component {
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
-              ref={ `title_${ d.cost }` }
+              ref={ `title_${ d.Cost }` }
               name="title"
-              defaultValue={ d.cost }
+              defaultValue={ d.Cost }
+            />
+          </div>
+          <div className="dtc">
+          <h1 className="f6 f5-ns fw6 lh-title black">Cap </h1>
+            <Input
+              onKeyDown={ this.handleEditField }
+              type="text"
+              className="f6 mb2 mr5"
+              ref={ `title_${ d.Cap }` }
+              name="title"
+              defaultValue={ d.Cap }
             />
           </div>
           <div className="dtc">
@@ -143,9 +148,9 @@ class AdminEventList extends React.Component {
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
-              ref={ `title_${ d.location }` }
+              ref={ `title_${ d.Location }` }
               name="title"
-              defaultValue={ d.location }
+              defaultValue={ d.Location }
             />
           </div>
           </article>
@@ -155,12 +160,12 @@ class AdminEventList extends React.Component {
           <h1 className="f6 f5-ns fw6 lh-title black ">Description </h1>
             <TextArea
               onKeyDown={ this.handleEditField }
-              autosize={{ minRows: 10, maxRows: 1000 }}
+              autosize={{ maxRows: 1000 }}
               type="text"
               className="f6 mb2 mr5"
-              ref={ `title_${ d.description }` }
+              ref={ `title_${ d.Description }` }
               name="title"
-              defaultValue={ d.description }
+              defaultValue={ d.Description }
             />
           </div>
           <div className="clearfix dtc pl3">
@@ -178,11 +183,8 @@ class AdminEventList extends React.Component {
            <img alt="example" style={{ width: '100%' }} src={previewImage} />
          </Modal>
        </div>
-          <div className="pb3 pt3">
-          <button className="f6 button-reset ba b--black-10 dim pointer pv2 pa2 black-60 bg-green" onClick={ this.handleEditItem } label="Update Item"> Update </button>
-          </div>
-          <div className="pb3">
-          <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv2 pa2 white-80" onClick={ this.handleCancelEdit } label="Cancel Edit"> Cancel </button>
+          <div>
+          <button onClick={ this.handleEditItem } label="Update Item"> Update </button>
           </div>
       </article>
       </div>
@@ -196,11 +198,11 @@ class AdminEventList extends React.Component {
        </div>
        <div className="dtc pl2">
          <h1 className="f6 f5-ns fw6 lh-title black ">ID </h1>
-         <h2 className="f6 fw4 mt0 mb0 black-60">{d.id}</h2>
+         <h2 className="f6 fw4 mt0 mb0 black-60">{d.WorkshopID}</h2>
        </div>
        <div className="dtc  pl2">
          <h1 className="f6 f5-ns fw6 lh-title black ">Title</h1>
-         <h2 className="f6 fw4 mt0 mb0 black-60">{d.name}</h2>
+         <h2 className="f6 fw4 mt0 mb0 black-60">{d.Name}</h2>
        </div>
        <div className="dtc pl2">
          <h1 className="f6 f5-ns fw6 lh-title black ">Description </h1>
@@ -211,28 +213,32 @@ class AdminEventList extends React.Component {
                less='Show less'
                anchorClass=''
                onClick={this.executeOnClick(true)}>
-               {d.description}
+               {d.Description}
          </ShowMoreText>
          </h2>
        </div>
        <div className="dtc  pl2">
          <h1 className="f6 f5-ns fw6 lh-title black ">Time </h1>
-         <h2 className="f6 fw4 mt0 mb0 black-60">{d.time}</h2>
+         <h2 className="f6 fw4 mt0 mb0 black-60">{d.Time}</h2>
        </div>
        <div className="dtc  pl2">
          <h1 className="f6 f5-ns fw6 lh-title black ">Cost </h1>
-         <h2 className="f6 fw4 mt0 mb0 black-60">{d.cost}</h2>
+         <h2 className="f6 fw4 mt0 mb0 black-60">{d.Cost}</h2>
+       </div>
+       <div className="dtc  pl2">
+         <h1 className="f6 f5-ns fw6 lh-title black ">Cap </h1>
+         <h2 className="f6 fw4 mt0 mb0 black-60">{d.Cap}</h2>
        </div>
        <div className="dtc  pl2">
          <h1 className="f6 f5-ns fw6 lh-title black ">Location </h1>
-         <h2 className="f6 fw4 mt0 mb0 black-60">{d.location}</h2>
+         <h2 className="f6 fw4 mt0 mb0 black-60">{d.Location}</h2>
        </div>
        <div className="dtc ">
          <form className="w-100 tr pr3">
-           <button className="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" type="submit" onClick={ this.toggleEditing.bind( null, d.id ) }>+ Edit</button>
+           <button className="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" type="submit" onClick={ this.toggleEditing.bind( null, d.WorkshopID ) }>+ Edit</button>
          </form>
          <form className="w-100 tr pr3">
-           <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv1 white-80" type="submit" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.handleDelete(d.id) } }>- Delete</button>
+           <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv1 white-80" type="submit" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.handleDelete(d.WorkshopID) } }>- Delete</button>
          </form>
        </div>
       </article>
@@ -240,15 +246,73 @@ class AdminEventList extends React.Component {
 
   }
 
+
+
+  renderItem(d){
+    var imgName="https://workshop-objects-1.s3.amazonaws.com/workshops/"+d.WorkshopID+".jpg"
+    return(
+    <article className="dt w-100 bb b--black-05 pb2 mt2" href="#0">
+     <div className="dtc w2 w3-ns ">
+      <h1 className="f6 f5-ns fw6 lh-title black ">Image </h1>
+       <img src={imgName} className="ba b--black-10 db br2 w2 w3-ns h2 h3-ns"/>
+     </div>
+     <div className="dtc pl2">
+       <h1 className="f6 f5-ns fw6 lh-title black ">ID </h1>
+       <h2 class="f6 fw4 mt0 mb0 black-60">{d.WorkshopID}</h2>
+     </div>
+     <div className="dtc  pl2">
+       <h1 className="f6 f5-ns fw6 lh-title black ">Title</h1>
+       <h2 class="f6 fw4 mt0 mb0 black-60">{d.Name}</h2>
+     </div>
+     <div className="dtc pl2">
+       <h1 className="f6 f5-ns fw6 lh-title black ">Description </h1>
+       <h2 class="f6 fw4 mt0 mb0 black-60">
+       <ShowMoreText
+             lines={3}
+             more='Show more'
+             less='Show less'
+             anchorClass=''
+             onClick={this.executeOnClick(true)}>
+             {d.Description}
+       </ShowMoreText>
+       </h2>
+     </div>
+     <div className="dtc  pl2">
+       <h1 className="f6 f5-ns fw6 lh-title black ">Time </h1>
+       <h2 class="f6 fw4 mt0 mb0 black-60">{d.Time}</h2>
+     </div>
+     <div className="dtc  pl2">
+       <h1 className="f6 f5-ns fw6 lh-title black ">Cost </h1>
+       <h2 class="f6 fw4 mt0 mb0 black-60">{d.Cost}</h2>
+     </div>
+     <div className="dtc  pl2">
+       <h1 className="f6 f5-ns fw6 lh-title black ">Cap </h1>
+       <h2 class="f6 fw4 mt0 mb0 black-60">{d.Cap}</h2>
+     </div>
+     <div className="dtc  pl2">
+       <h1 className="f6 f5-ns fw6 lh-title black ">Location </h1>
+       <h2 class="f6 fw4 mt0 mb0 black-60">{d.Location}</h2>
+     </div>
+     <div className="dtc ">
+       <form className="w-100 tr pr3">
+         <button className="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" type="submit">+ Edit</button>
+       </form>
+       <form className="w-100 tr v-bottom pr3">
+         <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv1 white-80" type="submit" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.handleDelete(d.id) } }>- Delete</button>
+       </form>
+     </div>
+    </article>
+
+  );}
+
   render(){
-    console.log(this.props.fileListMap)
     return (
-      <div className="mw8 pb5 center">
-        {this.props.data.map((item) => this.renderOrEditItem(item))}
-      </div>
-    );
+    <div className="mw8 pb5 center">
+    {this.props.data.map((item) => this.renderOrEditItem(item))}
+   </div>
+ );
   }
 
 }
 
-export default AdminEventList;
+export default AdminWorkshopList;

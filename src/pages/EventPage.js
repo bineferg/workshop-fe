@@ -15,6 +15,7 @@ class EventPage extends React.Component {
     history.push('/events');
     this.sortEvents = this.sortEvents.bind(this);
  }
+
  sortEvents(events) {
 
    events.sort(function(a, b) {
@@ -41,13 +42,14 @@ class EventPage extends React.Component {
 			})
 		}).catch(error => this.setState({ err: true}));
 }
-   render() {
+
+ render() {
 
   if(this.state.err){
     return (<ErrPage/>);
   }
 	if(!this.state.eventData ) return <p></p>;
-  console.log(this.state.eventData);
+
 	return(
 			   <div>
 				   <EventList data={this.sortEvents(this.state.eventData.events)}/>

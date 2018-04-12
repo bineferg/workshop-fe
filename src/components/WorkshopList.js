@@ -18,13 +18,12 @@ class WorkshopList extends React.Component {
     	});
   	}
 
-  handleDescription(description) {
-		console.log(description)
-		var res = description.replace("[p]", "<p>");
-		var result = res.replace("[pc]","</p>")
-		console.log({description})
-		return result
-	}
+		handleDescription(description) {
+			return description.split("[p]").map(p => {
+				return <p>{p}</p>;
+
+			})
+		}
 
 	renderItem(d) {
 
@@ -36,14 +35,14 @@ class WorkshopList extends React.Component {
             return(
 
 										<article className="bt pb5 bb b--black-10 db pv4 ph3 ph0-l no-underline black">
-											<div className="flex flex-column center flex-row-ns">
-												<div className="pr3-ns mb4 mb0-ns w-100 w-40-ns">
-													<img src={imgName} className="db wrkshopImg mb4" alt="Photo of a dimly lit room with a computer interface terminal."/>
-													<p className="f6 b  lh-copy mv0">{d.Location}</p>
-													<p className="f6 lh-copy mv0 i red">{full}</p>
-													<p className="f6  b lh-copy mv0">Price: {d.Cost}
+											<div className="flex flex-column alc justify-center center flex-row-ns">
+												<div className="pr3-ns mb4 mb0-ns w-100 w-40-ns v-mid dtc">
+													<img src={imgName} className="wrkshopImg mb4" alt="No Image Found"/>
+													<p className="f6 ml2 b lh-copy mv0">{d.Cost}
+													<p className="f6 b lh-copy mv0">{d.Location}</p>
+													<p className="f6 ml2 lh-copy mv0 i red">{full}</p>
 													</p>
-													<p className="f6  b lh-copy mv0">Time: {d.Time}
+													<p className="f6 ml2 b lh-copy mv0">{d.Time}
 													</p>
 												</div>
 											<div className="w-100 w-60-ns pl3-ns">

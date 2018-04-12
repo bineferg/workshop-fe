@@ -1,5 +1,4 @@
 import React from 'react';
-import thumb from '../assets/test-1.jpg';
 import SignUpModal from '../components/SignUpModal.js';
 import RegisterForm from '../components/RegisterForm.js';
 
@@ -58,7 +57,6 @@ render() {
 			<SignUpModal show={this.state.isOpen} name={this.state.name} id={this.state.id} onClose={this.toggleModal}>
 				<RegisterForm id={this.state.id} name={this.state.name} isFull={this.state.isFull}/>
 			</SignUpModal>
-
 			{this.props.data.map((item) => this.renderItem(item))}
 			<div className="mb3"></div>
 			</section>

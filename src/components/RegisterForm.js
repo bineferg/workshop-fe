@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import logoBW from '../assets/logo-black-white.jpg';
-import { DatePicker, Icon, Form, Input, TimePicker, Checkbox } from 'antd';
-import moment from 'moment';
+import { Icon, Form, Input} from 'antd';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
-const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/mail"
+const mailURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/mail"
+const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/signup"
 
 class RegisterForm extends React.Component {
 constructor() {
@@ -38,11 +38,8 @@ handleSubmit = (e, message) => {
   Email: this.state.email,
   Message: msg,
  }
- console.log(payload)
 
- console.log(this.props.id);
-	var url = backendURL;
-	fetch(url, {
+	fetch(mailURL, {
 		method: 'POST',
 		headers: {
 		'Accept': 'application/json',
@@ -57,6 +54,23 @@ handleSubmit = (e, message) => {
 			console.log('Request failed', error);
 			return;
 		});
+
+    fetch(backendURL + '/' + this.props.id, {
+    method: 'POST',
+    headers: {
+		'Accept': 'application/json',
+		'Content-Type': 'application/json',
+		},
+    body: JSON.stringify(payload)
+    }).then((response) => {
+  			if (response.ok) {
+				this.setState({registerSuccess: true})
+  			}
+		})
+    .catch(function(error){
+      console.log('Request failed', error);
+      return;
+    });
 
  this.setState({
   firstName:'',
@@ -75,7 +89,7 @@ render() {
     <p className="f3 fw1 lh-title tc">
     Thanks for signing up!</p>
     <p className="f5 fw1 lh-title tc">
-     Please bring cash with you to your workshop and we
+     For paid events, please bring cash with you to your workshop and we
     look forward to seeing you. </p>
     </div>
   );

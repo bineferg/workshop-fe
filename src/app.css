@@ -165,6 +165,9 @@ body {
 .pt3 {
     padding-top: 1rem;
 }
+.pt6 {
+    padding-top: 6rem;
+}
 .mv5 {
     margin-top: 4rem;
     margin-bottom: 4rem;
@@ -190,6 +193,15 @@ body {
 }
  .flex-column {
      flex-direction: column;
+}
+.justify-center{
+  justify-content: center;
+}
+.alc{
+  align-items: center;
+}
+.flex-row {
+    flex-direction: row;
 }
  .baskerville {
      font-family: baskerville, serif;
@@ -307,6 +319,9 @@ body {
 .bg-white {
   background-color: white;
 }
+.bg-red {
+  background-color: rgb(183, 7, 7);
+}
  .measure {
      max-width: 30em;
 }
@@ -417,6 +432,9 @@ body {
  .w3 {
      width: 10rem;
 }
+.w8 {
+    width: 30rem;
+}
  .w-100 {
      width: 100%;
 }
@@ -432,12 +450,18 @@ body {
 .v-mid {
     vertical-align: middle;
 }
+.v-bottom {
+    vertical-align: bottom;
+}
  .black-60 {
      color: rgba(0, 0, 0, .6);
 }
  .bt {
      border-top-style: solid;
      border-top-width: 1px;
+}
+.bg-green{
+  background-color: rgb(206, 239, 174);
 }
  .black {
      color: #000;
@@ -519,6 +543,9 @@ body {
  .mr3 {
      margin-right: 4rem;
 }
+.mr10 {
+    margin-right: 10rem;
+}
 .mr2 {
     margin-right: 2.5rem;
 }
@@ -539,6 +566,9 @@ body {
 }
  .mt2 {
      margin-top: .75rem;
+}
+.mt1.8{
+  margin-top: 1.8rem;
 }
 .mt4 {
     margin-top: 1.25rem;
@@ -582,6 +612,13 @@ margin-top: 2.25rem;
 }
  .f6 {
      font-size: .995rem;
+}
+.bg-black-10 {
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.bg-black-05 {
+    background-color: rgba(0, 0, 0, .05);
 }
  .f1 {
      font-size: 3rem;
@@ -729,6 +766,18 @@ margin-top: 2.25rem;
     .w-50-ns {
         width: 50%;
     }
+    .dt-ns {
+        display: table;
+    }
+
+    .dtc-ns {
+        display: table-cell;
+    }
+
+    .dt--fixed-ns {
+        table-layout: fixed;
+        width: 100%;
+    }
 }
 
  .fw2 {
@@ -736,6 +785,12 @@ margin-top: 2.25rem;
 }
 .w-50-ns {
     width: 50%;
+}
+.top50{
+  top: 50%
+}
+.left50:{
+  left: 50%
 }
  .lh-copy {
      line-height: 1.5;
@@ -810,9 +865,6 @@ margin-top: 2.25rem;
 .pa4 {
     padding: 2rem;
 }
-.mw9 {
-    max-width: 96rem;
-}
  .mt0 {
      margin-top: 0;
 }
@@ -848,6 +900,16 @@ margin-top: 2.25rem;
 .pl5 {
     padding-left: 4rem;
 }
+.pl8 {
+    padding-left: 19rem;
+}
+.pl3 {
+    padding-left: 3rem;
+}
+.pl2 {
+    padding-left: 2rem;
+}
+
 .pl6 {
     padding-left: 5.5rem;
 }
@@ -1076,6 +1138,7 @@ margin-top: 2.25rem;
      position: relative;
      list-style: none;
      padding: 6px 12px;
+     height: auto;
      cursor: pointer;
 }
  .react-tabs__tab--selected {
