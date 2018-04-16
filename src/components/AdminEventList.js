@@ -6,6 +6,7 @@ const eventsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/
 const FormItem = Form.Item;
 const { TextArea } = Input;
 const imageURL = "https://workshop-objects-1.s3.amazonaws.com/events/";
+const defaultLocation = "ForsterStrasse 51"
 
 class AdminEventList extends React.Component {
   constructor(props) {
@@ -29,12 +30,16 @@ class AdminEventList extends React.Component {
   executeOnClick(isExpanded) {}
 
   handleDelete(id) {
-    /*fetch(eventsURL + '?event_id=' + id, {
+    fetch(eventsURL + '?event_id=' + id, {
     method: 'delete'
     })
-    .then(response => response.json());*/
-    console.log(id);
+    .then(response => response.json())
+    .catch (function (error) {
+			console.log('Request failed', error);
+			return
+    });
   }
+
   /* handle image and upload functionality*/
   handleCancel = () => this.setState({ previewVisible: false })
 
@@ -52,8 +57,8 @@ class AdminEventList extends React.Component {
   }
 
 
-  handleEventUpdate( update ) {
-    console.log("update")
+  handleWorkshopUpdate( update ) {
+    console.log("update", update)
   }
 
   handleEditField( event ) {
@@ -72,7 +77,6 @@ class AdminEventList extends React.Component {
     return this.setState( { editing: itemId } );
   }
 
-
   renderOrEditItem(d){
 
     var previewVisible = this.state.previewVisible;
@@ -89,7 +93,6 @@ class AdminEventList extends React.Component {
     var imgName=imageURL+d.id+".jpg"
 
     if ( this.state.editing === d.id ) {
-      console.log(this.state.fileListMap);
       return(
       <div>
       <article className="dt w-100 b--black-05 pb2 mt2">
@@ -179,7 +182,7 @@ class AdminEventList extends React.Component {
          </Modal>
        </div>
           <div className="pb3 pt3">
-          <button className="f6 button-reset ba b--black-10 dim pointer pv2 pa2 black-60 bg-green" onClick={ this.handleEditItem } label="Update Item"> Update </button>
+          <button className="f6 button-reset ba b--black-10 dim pointer pv2 pa2 black-60 bg-green" onClick={ this.handleUpdateItem } label="Update Item"> Update </button>
           </div>
           <div className="pb3">
           <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv2 pa2 white-80" onClick={ this.handleCancelEdit } label="Cancel Edit"> Cancel </button>
@@ -241,7 +244,6 @@ class AdminEventList extends React.Component {
   }
 
   render(){
-    console.log(this.props.fileListMap)
     return (
       <div className="mw8 pb5 center">
         {this.props.data.map((item) => this.renderOrEditItem(item))}

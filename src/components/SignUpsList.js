@@ -1,58 +1,60 @@
 import React from 'react';
 
-const workshopURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/workshops"
-const signupsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/signup"
 
 class SignUpsList extends React.Component {
-    constructor(){
-      this.setState({
-        sMap: {},
-      });
+    constructor(props){
+      super(props);
+      this.renderSignUp = this.renderSignUp.bind(this);
+
     }
 
-    componentDidMount() {
-  	fetch(workshopURL, {
-  		headers: {
-       			'Accept': 'application/json',
-  			'Content-Type': 'application/json'
-       		},
-       		method : 'GET'})
-  		.then(d => d.json())
-  		.then(d => {
-  			this.setState({
-  				workshopData: d
-  			})
-  		}).catch(error => this.setState({ err: true}));
-      var workshops = this.state.workshopData.workshops
-      for (var i=0; i<workshops.length; i++){
-        fetch(signupsURL + '/' + workshops[i].WorkshopID, {
-        method: 'GET',
+    renderSignUp(item){
+      return (
+        <tr class="stripe-dark">
+          <td class="pa3">{item.FirstName}</td>
+          <td class="pa3">{item.LastName}</td>
+          <td class="pa3">{item.Email}</td>
+          <td class="pa3">{item.Message}</td>
+        </tr>
+      );
 
-        .then(d => d.json())
-        .then(d => {
-          if (response.ok) {
-          this.setState({
-            registerSuccess: true,
-            sMap: {workshops[i].WorkshopID : d.sign_ups}
-          });
-          console.log(this.state.sMap);
-          }
-        })
-        .catch(function(error){
-          console.log('Request failed', error);
-          return;
-        });
+    }
+    renderItem(item) {
+      console.log(item.WorkshopName)
+      if(!item.SignUps){
+        return;
       }
-     }
+      return(
+        <div className="mw7 pb5 center avenir">
+          <h3 className="fw6 f3 tc avenir">{item.WorkshopName}</h3>
+          <div class="pa2 b--black-05">
+            <div class="overflow-auto">
+            <table class="f6 w-100 mw8 center" cellspacing="0">
+              <thead>
+                <tr class="stripe-dark">
+                  <th class="fw6 tl pa3 bg-white">First Name</th>
+                  <th class="fw6 tl pa3 bg-white">Last Name</th>
+                  <th class="fw6 tl pa3 bg-white">Email</th>
+                  <th class="fw6 tl pa3 bg-white">Mesage</th>
+                </tr>
+              </thead>
+            <tbody class="lh-copy">
+            {item.SignUps.map((item) => this.renderSignUp(item))}
+            </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+      );
+
+    }
 
 
 
     render(){
       return(
-        <div className="dtc tc ph3 ph4-l">
-          <h1 className="f3 f2-m f1-l fw2 black-90 mt10">
-            Page Not Found
-          </h1>
+        <div className="mt10">
+            {this.props.data.map((item) => this.renderItem(item))}
         </div>
       );
     }

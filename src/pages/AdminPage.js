@@ -5,11 +5,11 @@ import CreateEventPage from './CreateEventPage.js';
 import CreateWorkshopPage from './CreateWorkshopPage.js';
 import ErrPage from './ErrPage.js';
 import ReadMePage from './ReadMePage.js';
-import SignUpPage from './SignUpPage.js';
 import history from '../components/history.js';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import SignUpsList from '../components/SignUpsList.js';
 
-
+const signupsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/signup"
 const eventsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/events"
 const workshopURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/workshops"
 const eventImageURL = "https://workshop-objects-1.s3.amazonaws.com/events/";
@@ -95,10 +95,11 @@ componentDidMount() {
           eventData: d
         })
       }).catch(error => this.setState({ err: true}));
+
       fetch(workshopURL, {
     		headers: {
          			'Accept': 'application/json',
-    			'Content-Type': 'application/json'
+    			    'Content-Type': 'application/json'
          		},
          		method : 'GET'})
     		.then(d => d.json())
@@ -108,6 +109,22 @@ componentDidMount() {
     			})
     		}).catch(error => this.setState({ err: true}));
 
+        fetch(signupsURL + '/all', {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: 'GET',
+        })
+        .then(d => d.json())
+        .then(d => {
+          this.setState({
+    				signupData: d
+    			})
+        })
+        .catch(function(error){
+          this.state.err = true;
+        });
     }
 
     createEvent = () => {
@@ -132,7 +149,7 @@ componentDidMount() {
     if(this.state.err){
       return (<ErrPage/>);
     }
-    if(!this.state.eventData || !this.state.workshopData ) return <p></p>;
+    if(!this.state.eventData || !this.state.workshopData || !this.state.signupData) return<p></p>;
 
     if(this.state.createEvent){
       return(
@@ -179,7 +196,7 @@ componentDidMount() {
               </div>
             </TabPanel>
             <TabPanel>
-              <SignUpPage/>
+              <SignUpsList data={this.state.signupData}/>
             </TabPanel>
             <TabPanel>
               <ReadMePage/>

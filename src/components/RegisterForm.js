@@ -31,7 +31,7 @@ handleChange = (e) => {
 
 handleSubmit = (e, message) => {
  e.preventDefault();
- var msg = "For Workshop: "+ this.props.name+ "\n Comment: "+ this.state.comment
+ var msg = "For Workshop: "+ this.props.name+ "\n Comment: "+ this.state.comments
  var payload = {
   FirstName: this.state.firstName,
   LastName: this.state.lastName,
@@ -76,7 +76,7 @@ handleSubmit = (e, message) => {
   firstName:'',
   lastName:'',
   email: '',
-  comment:'',
+  comments:'',
  });
 };
 

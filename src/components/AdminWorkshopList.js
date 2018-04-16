@@ -6,6 +6,7 @@ const workshopURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:800
 const imageURL = "https://workshop-objects-1.s3.amazonaws.com/workshops/";
 const FormItem = Form.Item;
 const { TextArea } = Input;
+const defaultLocation = "ForsterStrasse 51"
 
 class AdminWorkshopList extends React.Component {
 
@@ -16,6 +17,7 @@ class AdminWorkshopList extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.executeOnClick = this.executeOnClick.bind(this);
     this.toggleEditing = this.toggleEditing.bind(this);
+    this.handleCancelEdit = this.handleCancelEdit.bind(this);
     this.state = {
     previewVisible: false,
     previewImage: '',
@@ -28,11 +30,17 @@ class AdminWorkshopList extends React.Component {
   executeOnClick(isExpanded) {}
 
   handleDelete(id) {
-    /*fetch(workshopURL + '?workshop_id=' + id, {
+    fetch(workshopURL + '?workshop_id=' + id, {
     method: 'delete'
     })
-    .then(response => response.json());*/
-    console.log(id);
+    .then(response => response.json())
+    .catch (function (error) {
+			console.log('Request failed', error);
+			return
+    });
+  }
+  handleCancelEdit(){
+    this.setState({editing:''});
   }
 
   handleCancel = () => this.setState({ previewVisible: false })
@@ -46,10 +54,42 @@ class AdminWorkshopList extends React.Component {
 
   handleChange = ({ fileList }) => this.state.fileListMap[fileList.uid] = fileList;
 
+  handleUpdateItem= (e) => {
+    console.log(e)
+   let newState = {};
+   for (var key in e.target) {
+     newState[key.name] = e.target[key].value;
+   }
+   this.setState(newState);
+   var payload = {
+     workshop_id: this.state.workshopID,
+     Name: this.state.workshopName,
+     Description: this.state.description,
+     Time : this.state.workshopTimes,
+     Cost: this.state.workshopCost,
+     Cap: parseInt(this.state.workshopCap),
+     Location: defaultLocation,
+   }
+   console.log(payload);
 
-  handleEventUpdate( update ) {
-    console.log("update")
-  }
+   /*fetch(workshopURL, {
+   method: 'PUT',
+   headers: {
+   'Accept': 'application/json',
+   'Content-Type': 'application/json',
+   },
+   body: JSON.stringify(payload)
+   }).then((response) => {
+       if (response.ok) {
+         this.setState({createSuccess: true})
+       }
+   })
+   .catch(function(error){
+     console.log('Request failed', error);
+     return;
+   });*/
+ };
+
 
   handleEditField( event ) {
     if ( event.keyCode === 13 ) {
@@ -59,7 +99,7 @@ class AdminWorkshopList extends React.Component {
       update.id = this.state.editing;
       update[ target.name ] = target.value;
 
-      this.handleUpdate( update );
+      /*this.handleUpdate( update );*/
     }
   }
 
@@ -83,20 +123,12 @@ class AdminWorkshopList extends React.Component {
     var imgName=imageURL+d.WorkshopID+".jpg"
 
     if ( this.state.editing === d.WorkshopID ) {
-      console.log(this.state.fileListMap);
       return(
       <div>
       <article className="dt w-100 b--black-05 pb2 mt2">
           <div className="dtc w2 w3-ns">
           <h1 className="f6 f5-ns fw6 lh-title black">ID </h1>
-            <Input
-              onKeyDown={ this.handleEditField }
-              type="text"
-              className="f6 mb2 mr5"
-              ref={ `title_${ d.WorkshopID }` }
-              name="id"
-              defaultValue={ d.WorkshopID }
-            />
+            <h2 className="f6 fw4 mt0 mb0 black-60">{d.WorkshopID}</h2>
           </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Title </h1>
@@ -105,7 +137,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Name }` }
-              name="title"
+              name="name"
               defaultValue={ d.Name }
             />
           </div>
@@ -116,7 +148,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Time }` }
-              name="title"
+              name="time"
               defaultValue={ d.Time }
             />
           </div>
@@ -127,7 +159,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Cost }` }
-              name="title"
+              name="cost"
               defaultValue={ d.Cost }
             />
           </div>
@@ -138,7 +170,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Cap }` }
-              name="title"
+              name="cap"
               defaultValue={ d.Cap }
             />
           </div>
@@ -149,7 +181,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Location }` }
-              name="title"
+              name="location"
               defaultValue={ d.Location }
             />
           </div>
@@ -164,7 +196,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Description }` }
-              name="title"
+              name="description"
               defaultValue={ d.Description }
             />
           </div>
@@ -182,10 +214,13 @@ class AdminWorkshopList extends React.Component {
          <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
            <img alt="example" style={{ width: '100%' }} src={previewImage} />
          </Modal>
-       </div>
-          <div>
-          <button onClick={ this.handleEditItem } label="Update Item"> Update </button>
-          </div>
+         </div>
+            <div className="pb3 pt3">
+            <button className="f6 button-reset ba b--black-10 dim pointer pv2 pa2 black-60 bg-green" onClick={ this.handleUpdateItem } label="Update Item"> Update </button>
+            </div>
+            <div className="pb3">
+            <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv2 pa2 white-80" onClick={ this.handleCancelEdit } label="Cancel Edit"> Cancel </button>
+            </div>
       </article>
       </div>
     );

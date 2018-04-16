@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     	<Route path="/space" component={TheSpacePage} />
       <Route path="/contact" component={ContactUsPage}/>
       <Route path= "/gear" component={GearPage} />
+
     	</Switch>
      </div>
    </Router>

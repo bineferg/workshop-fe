@@ -165,6 +165,9 @@ body {
 .pt3 {
     padding-top: 1rem;
 }
+.pt4 {
+    padding-top: 2rem;
+}
 .pt6 {
     padding-top: 6rem;
 }
@@ -317,7 +320,7 @@ body {
     opacity: .8;
 }
 .bg-white {
-  background-color: white;
+  background-color: #fff;
 }
 .bg-red {
   background-color: rgb(183, 7, 7);
@@ -585,6 +588,9 @@ margin-top: 7.25rem;
 .mt5 {
 margin-top: 2.25rem;
 }
+.mt5s{
+  margin-top: 3.25rem;
+}
 .mt6 {
   margin-top: 3.4rem;
 }
@@ -610,6 +616,18 @@ margin-top: 2.25rem;
      overflow: hidden;
      text-overflow: ellipsis;
 }
+.overflow-auto {
+    overflow: auto;
+}
+
+.stripe-dark:nth-child(odd) {
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.tl {
+    text-align: left;
+}
+
  .f6 {
      font-size: .995rem;
 }
