@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Form, Input, Button, Modal} from 'antd';
+import { Icon, Form, Input, Button} from 'antd';
 import 'antd/dist/antd.css';
 import trashcan from '../assets/trashcan.png';
 import Dropzone from 'react-dropzone';
@@ -97,7 +97,6 @@ class CreateEventPage extends React.Component {
 }
 
   render() {
-    const { fileList } = this.state;
     const uploadButton = (
       <div className="db tc mt5">
         <Icon type="plus" />

@@ -88,7 +88,7 @@ body {
   width: 100%
 }
 .sticky-footer {
-  position: absolute;
+  position: static;
   bottom: 0;
   overflow: hidden;
   width: 100%
@@ -380,6 +380,9 @@ body {
 .measure-narrow {
     max-width: 20em;
 }
+.measure-home {
+  max-width: 40em;
+}
  .measure-cb {
      max-width: 50em;
 }
@@ -530,9 +533,9 @@ body {
  .pa2 {
      padding: .5rem;
 }
-    .pv6 {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+.pv6 {
+    padding-top: 8.5rem;
+    padding-bottom: 8.5rem;
 }
  .pa3 {
      padding: 1rem;
@@ -641,7 +644,7 @@ margin-top: 10rem;
 margin-top: 2.25rem;
 }
 .mt5s{
-  margin-top: 3.25rem;
+  margin-top: 2.45rem;
 }
 .mt6 {
   margin-top: 3.4rem;
@@ -743,6 +746,7 @@ margin-top: 2.25rem;
      border-bottom:2px solid rgba(0,0,0,0.1);
      padding-bottom:2px;
      padding-top:2px;
+     padding-left: 0;
      background-color: rgba(255, 255, 255, 0);
 }
 .pr2s {
@@ -863,6 +867,9 @@ margin-top: 2.25rem;
 
  .fw2 {
      font-weight: 200;
+}
+.fw3 {
+    font-weight: 700;
 }
 .w-50-ns {
     width: 50%;

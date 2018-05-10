@@ -94,7 +94,7 @@ class TheSpacePage extends React.Component {
   render() {
     const width = this.state.width;
 	  return (
-      <div className="mt5s">
+      <div className="mt7">
       <Measure bounds onResize={(contentRect) => this.setState({ width: contentRect.bounds.width })}>
         {
         ({measureRef}) => {

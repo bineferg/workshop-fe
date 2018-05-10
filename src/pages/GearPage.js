@@ -131,9 +131,9 @@ class GearPage extends React.Component {
  render(){
 
    return (
-     <article className="ml7-5 db pb5">
-      <h2 className="avenir fw1 mt10 pl5 f1-5 mb0">Rental Gear </h2>
-        <div className="cf pa2">
+     <article className="db">
+      <h2 className="avenir fw1 mt10 tc f1-5 mb2">Rental Gear </h2>
+        <div className="cf pa5">
           {gear.map((item) => this.getCard(item))}
         </div>
      </article>

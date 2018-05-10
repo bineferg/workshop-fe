@@ -61,7 +61,7 @@ class ContactUsPage extends React.Component {
    if(this.state.submitSuccess) {
      return(
        <article className="bg-white cf">
-         <div className="vh-75 cover mt7 bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
+         <div className="vh-75 cover mt5s bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
          <p className="tc f2 mb4 fw1 avenir ">Contact Us </p>
          <div className="fl w-67 bg-near-white pb3 vh-100">
            <h1 className="plr5 f2 mb4 fw1 avenir mt10">Thanks for your inquiry, we will get back to you shortly!</h1>
@@ -83,13 +83,13 @@ class ContactUsPage extends React.Component {
    }
    return (
    <article className="bg-white cf">
-     <div className="vh-75 cover mt5 bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
-     <p className="tc f2 mb4 fw1 avenir ">Contact Us </p>
+     <div className="vh-75 cover mt5s bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
+     <p className="tc f2 mb4 mt5 fw1 avenir ">Contact Us </p>
      <div className="fl w-67 bg-near-white"></div>
 
-  <div className="fl w-67 bg-near-white">
-    <h1 className="plr5 f2 mb4 fw1 avenir">Get in Touch</h1>
-     <div className="pa5 dark-gray">
+  <div className="fl w-67 plr5 h-100 bg-near-white">
+    <h1 className="plr5 f2 mt4 fw1 avenir">Get in Touch</h1>
+     <div className="dark-gray">
      <Form layout={"vertical"} onSubmit={this.handleSubmit} className="black-80">
        <div className="measure center dib w-100 ">
          <div className="f6 db ml3">
@@ -119,12 +119,12 @@ class ContactUsPage extends React.Component {
        </Form>
     </div>
   </div>
-  <div className="fl w-33 pb10 dib vh-100 bg-light-gray tc">
-    <h1 className="plr5 f3 mt10 fw3 avenir">Location</h1>
+  <div className="fl w-33 dib h-100 bg-light-gray tc">
+    <p className="plr5 f3 mt10 fw3 avenir">Location</p>
     <p className="mb4">Forster Strasse 51 <br></br> 10997, Berlin</p>
-    <h1 className="plr5 f3 fw3 avenir">Phone</h1>
+    <p className="plr5 f3 fw3 avenir">Phone</p>
     <p className="mb4">T: +49 176 61551591</p>
-    <h1 className="plr5 f3 fw3 avenir">Social</h1>
+    <p className="plr5 f3 fw3 avenir">Social</p>
     <a className="link tc pr2" href="http://instagram.com">
     <img src="./insta.png" class="foot-icon dib"></img></a>
     <a className="link tc" href="https://www.facebook.com/theworkshoponfoster/">
