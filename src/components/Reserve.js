@@ -12,8 +12,8 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 
 class Reserve extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {}
 
     this.handleChange = this.handleChange.bind(this);
@@ -48,7 +48,7 @@ class Reserve extends React.Component {
   handleSubmit(e){
     e.preventDefault();
 
-    var msg = "Rental Inquiry: "+ this.props.name + "\n Details: "+ this.state.comments
+    var msg = "Rental Inquiry: "+ this.props.location.state.name + "\n Details: "+ this.state.comments
               +"\n Pickup: "+this.state.pickupDate+" "+this.state.pickupTime +
               "\n Drop Off: "+this.state.dropoffDate + " "+ this.state.dropoffTime+"\n";
     var payload = {
@@ -57,9 +57,7 @@ class Reserve extends React.Component {
         Email: this.state.email,
         Message: msg,
     }
-    console.log(payload)
 
-    console.log(this.props.id);
     var url = backendURL;
     fetch(url, {
       method: 'POST',
@@ -94,7 +92,7 @@ class Reserve extends React.Component {
 
 render() {
   const format = 'HH:mm';
-  this.state.title = this.props.name
+
   if(this.state.err){
     return (<ErrPage/>);
   }
@@ -102,9 +100,10 @@ render() {
     return(
     <div>
       <div className="mt10 pb5 mw9">
-        <img src={this.props.img} className="db center mb5 gearImg"></img>
-          <h2 className="avenir fw1 f1-5 mb2 db plr5 cf tc">{this.props.name}</h2>
-            <p className="pb5 plr5 f5 lh-copy db center measure-cb avenir">{this.props.description}</p>
+        <img src={this.props.location.state.img} className="db center mb5 gearImg"></img>
+          <h2 className="avenir fw1 f1-5 mb0 db plr5 cf tc">{this.props.location.state.name}</h2>
+          <p className="avenir fw1 f2 mb2 db plr5 cf tc">{this.props.location.state.price}</p>
+            <p className="pb5 plr5 f5 lh-copy db center measure-cb avenir">{this.props.location.state.description}</p>
       </div>
       <article className="bg-white cf">
         <div className="fl w-100 pb10 bg-near-white">
@@ -118,9 +117,10 @@ render() {
   return(
     <div>
       <div className="mt10 pb5 mw9">
-        <img src={this.props.img} className="db center mb5 gearImg"></img>
-          <h2 className="avenir fw1 f1-5 mb2 db plr5 cf tc">{this.props.name}</h2>
-            <p className="pb5 plr5 f5 lh-copy db center measure-cb avenir">{this.props.description}</p>
+        <img src={this.props.location.state.img} className="db center mb5 gearImg"></img>
+          <h2 className="avenir fw1 f1-5 mb0 db plr5 cf tc">{this.props.location.state.name}</h2>
+          <h3 className="avenir fw1 f2 mb2 db plr5 cf tc">{this.props.location.state.price}</h3>
+            <p className="pb5 plr5 f5 lh-copy db center measure-cb avenir">{this.props.location.state.description}</p>
       </div>
       <article className="bg-white cf">
         <div className="fl w-100 bg-near-white">
@@ -168,7 +168,7 @@ render() {
               </div>
               <div>
               <FormItem>
-              <Checkbox required="true"> I agree... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel suscipit ipsum. Quisque vel neque enim. Mauris hendrerit a ipsum ut vulputate. Phasellus pretium, erat ac lacinia lacinia, leo sapien commodo ligula, id gravida odio massa ut metus.</Checkbox>
+              <Checkbox required="true"> I agree that I am responsible for returning rental items in the same condition in which they were received, except for ordinary wear and tear. I am liable for the replacement cost of any damaged or lost items.</Checkbox>
               </FormItem>
               </div>
             <div>
@@ -188,6 +188,7 @@ Reserve.propTypes = {
 	 id: PropTypes.string,
    name: PropTypes.string,
 	 img: PropTypes.string,
+   price: PropTypes.string,
    description: PropTypes.string,
 	 children: PropTypes.node
 };

@@ -122,8 +122,8 @@ componentDidMount() {
     				signupData: d
     			})
         })
-        .catch(function(error){
-          this.state.err = true;
+        .catch(error => {
+          this.setState({err : true})
         });
     }
 
@@ -161,49 +161,49 @@ componentDidMount() {
         <CreateWorkshopPage/>
       );
     }
+      return (
+        <div className="mt10">
+        <center>
+        <h2 className="avenir fw1 f1-5 mb0 ph0-l">Admin Center</h2>
+        </center>
+  		    <Tabs>
+              <TabList>
+                <Tab>Manage Events</Tab>
+                <Tab>Manage Workshops</Tab>
+                <Tab>Sign Ups</Tab>
+                <Tab>README.md</Tab>
+              </TabList>
 
-		return (
-      <div className="mt10">
-      <center>
-      <h2 className="avenir fw1 f1-5 mb0 ph0-l">Admin Center</h2>
-      </center>
-		    <Tabs>
-            <TabList>
-              <Tab>Manage Events</Tab>
-              <Tab>Manage Workshops</Tab>
-              <Tab>Sign Ups</Tab>
-              <Tab>README.md</Tab>
-            </TabList>
-
-            <TabPanel>
-              <div>
-                <center>
-                  <button className="f6 grow no-underline logo-blue-bg ba ph3 pv2 mb4 mt4 dib near-black" onClick={() => this.createEvent()} >
-                  + Create Event
-                  </button>
-                </center>
-                <AdminEventList data={this.sortEvents(this.state.eventData.events)} fileListMap={this.handleEventFileList(this.state.eventData.events)}/>
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <div>
-                <center>
-                    <button className="f6 grow no-underline logo-green-bg ba ph3 pv2 mb4 mt4 dib near-black" onClick={() => this.createWorkshop()}>
-                        + Create Workshop
+              <TabPanel>
+                <div>
+                  <center>
+                    <button className="f6 grow no-underline logo-blue-bg ba ph3 pv2 mb4 mt4 dib near-black" onClick={() => this.createEvent()} >
+                    + Create Event
                     </button>
-                </center>
-                <AdminWorkshopList data={this.sortWorkshops(this.state.workshopData.workshops)} fileListMap={this.handleWorkshopFileList(this.state.workshopData.workshops)}/>
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <SignUpsList data={this.state.signupData}/>
-            </TabPanel>
-            <TabPanel>
-              <ReadMePage/>
-            </TabPanel>
-          </Tabs>
-          </div>
-		);
+                  </center>
+                  <AdminEventList data={this.sortEvents(this.state.eventData.events)} fileListMap={this.handleEventFileList(this.state.eventData.events)}/>
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <div>
+                  <center>
+                      <button className="f6 grow no-underline logo-green-bg ba ph3 pv2 mb4 mt4 dib near-black" onClick={() => this.createWorkshop()}>
+                          + Create Workshop
+                      </button>
+                  </center>
+                  <AdminWorkshopList data={this.sortWorkshops(this.state.workshopData.workshops)} fileListMap={this.handleWorkshopFileList(this.state.workshopData.workshops)}/>
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <SignUpsList data={this.state.signupData}/>
+              </TabPanel>
+              <TabPanel>
+                <ReadMePage/>
+              </TabPanel>
+            </Tabs>
+            </div>
+  		)
+
 
 	}
 

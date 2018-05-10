@@ -83,7 +83,7 @@ class ContactUsPage extends React.Component {
    }
    return (
    <article className="bg-white cf">
-     <div className="vh-75 cover mt7 bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
+     <div className="vh-75 cover mt5 bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
      <p className="tc f2 mb4 fw1 avenir ">Contact Us </p>
      <div className="fl w-67 bg-near-white"></div>
 

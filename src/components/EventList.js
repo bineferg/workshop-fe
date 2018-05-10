@@ -6,7 +6,7 @@ class EventList extends React.Component {
 	constructor() {
 		super();
     	this.state = {isOpen: false, name: "", id: ""};
-			this.handleDescription = this.handleDescription.bind(this);
+			this.handleParagraphs = this.handleParagraphs.bind(this);
 	}
 
   toggleModal = (name, id, isFull) => {
@@ -18,12 +18,12 @@ class EventList extends React.Component {
     	});
   	}
 
-		handleDescription(description) {
+		handleParagraphs(description) {
 			return description.split("[p]").map(p => {
-				return <p>{p}</p>;
-
+					return <p>{p}</p>;
 			})
 		}
+
 
 	renderItem(d) {
 		var imgName="https://workshop-objects-1.s3.amazonaws.com/events/"+d.id+".jpg"
@@ -35,7 +35,9 @@ class EventList extends React.Component {
 						</div>
 				<div className="w-100">
 				<h1 className="f3 fw1 tc avenir w-90 mt0 lh-title">{d.name}</h1>
-				<div className="f6 f5-l center w-90 lh-copy">{this.handleDescription(d.description)}</div>
+				<div className="f6 f5-l center w-90 lh-copy">
+					{this.handleParagraphs(d.description)}
+				</div>
 				<p className="f6 b ml2s f5-l lh-copy w-90 mv0">{d.location}</p>
 				<p className="f6 b ml2s lh-copy w-90 mv0">Price: {d.cost}
 				</p>

@@ -1,46 +1,84 @@
 import React from 'react';
-import { Icon, Form, Input, Button, Upload, Modal} from 'antd';
+import { Icon, Form, Input, Button, Modal} from 'antd';
 import 'antd/dist/antd.css';
+import trashcan from '../assets/trashcan.png';
+import Dropzone from 'react-dropzone';
+
 import randomstring from 'randomstring';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
 const eventsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/events"
+const uploadURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/upload"
 const defaultLocation = "ForsterStrasse 51"
-
 
 class CreateEventPage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-    previewVisible: false,
-    previewImage: '',
     fileList: [],
   };
   }
 
-  handlePreview = (file) => {
-    this.setState({
-      previewImage: file.url || file.thumbUrl,
-      previewVisible: true,
-    });
-  }
   handleChange = (e) => {
    let newState = {};
-
    newState[e.target.name] = e.target.value;
-
    this.setState(newState);
-   console.log(this.state);
   };
 
-  /*handleChange = ({ fileList }) => this.setState({ fileList })*/
+  handlePhotoChange = (files) => {
+    this.setState({fileList: files})
+  }
+  removePhoto = (e) => {
+    e.stopPropagation();
+    this.setState({fileList: []})
+  }
 
-  handleCancel = () => this.setState({ previewVisible: false })
+  putPhotoCall(files, id){
+    return new Promise(() => {
+      fetch(uploadURL + '/events/'+ id+'.jpg', {
+        method:'GET',
+      })
+      .then(d => d.json())
+      .then((d) => {
+        fetch(d.url, {
+          method: 'PUT',
+          body: files[0]
+        })
+        .then((response) => {
+          if(response.ok){
+            this.setState({photoCall: true})
+          }
+        })
+      })
+    })
+  }
 
+  doServerCall(payload){
+    return new Promise(() => {
+      fetch(eventsURL, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+        }).then((response) => {
+          if(response.ok){
+            this.setState({serverCall: true})
+          }
+        })
+    })
+   }
+
+
+  makeNewEvent(payload, files){
+    return Promise.all([this.putPhotoCall(files, payload.id), this.doServerCall(payload)])
+  }
 
   handleSubmit = (e) => {
   e.preventDefault();
+  console.log(this.state.fileList)
   this.props.form.validateFields((err, values) => {
     if (!err) {
       console.log('Received values of form: ', values);
@@ -54,42 +92,26 @@ class CreateEventPage extends React.Component {
     cost: this.state.eventCost,
     location: defaultLocation,
   }
+    this.makeNewEvent(payload, this.state.fileList)
 
-  fetch(eventsURL, {
-  method: 'POST',
-  headers: {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(payload)
-  }).then((response) => {
-      if (response.ok) {
-        this.setState({createSuccess: true})
-      }
-  })
-  .catch(function(error){
-    console.log('Request failed', error);
-    return;
-  });
 }
-normFile = (e) => {
-  console.log('Upload event:', e);
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e && e.fileList;
-}
-
 
   render() {
-
-    const { previewVisible, previewImage, fileList } = this.state;
+    const { fileList } = this.state;
     const uploadButton = (
-      <div>
+      <div className="db tc mt5">
         <Icon type="plus" />
         <div className="ant-upload-text">Upload</div>
       </div>
     );
+    if (this.state.photoCall && this.state.serverCall){
+      this.setState({photoCall: false, serverCall: false})
+      return <div>
+      <h1 className="plr5 f2 mb4 fw1 avenir mt10">Event Published!</h1>
+      <br/>
+      <button className="ph3 pv2 logo-green-bg ml3 grow no-underline ba b--black f6" onClick={ () => window.location.reload()}>Admin Center</button>
+      </div>
+    }
 
     return (
       <div className=" pb5 pt6 bg-near-white">
@@ -115,26 +137,25 @@ normFile = (e) => {
           <Input name="eventCost" placeholder="Free" required="true" onChange={this.handleChange} />
         </FormItem>
         <FormItem  className="fr pt4">
-          <Button className="bg-green" type="default" htmlType="submit">Submit</Button>
+          <Button className="bg-green" type="default" htmlType="submit" onClick={this.submitEvent}>Submit</Button>
         </FormItem>
-        <div className="clearfix">
-        <p className="black">Event Image:</p>
-       <Upload
-         action="//jsonplaceholder.typicode.com/posts/"
-         listType="picture-card"
-         fileList={fileList}
-         onPreview={this.handlePreview}
-         onChange={this.handleChange}
-       >
-         {!fileList ? null : uploadButton}
-       </Upload>
-       <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-         <img alt="example" style={{ width: '100%' }} src={previewImage} />
-       </Modal>
+        <div className="mb5">
+        <Dropzone
+          onDrop={ this.handlePhotoChange }
+          className="uploadBox"
+        >
+        {this.state.fileList.length > 0 ? <div>
+              <div>
+              {this.state.fileList.map((file) =>
+                  <div>
+                  <img src={trashcan} className="uploadImgRm trashIcon" onClick={this.removePhoto}/>
+                    <img src={file.preview} className="uploadBoxPreview" />
+
+                  </div>)}
+              </div>
+        </div> : uploadButton}
+      </Dropzone>
      </div>
-
-
-
       </Form>
 
       </div>
@@ -142,7 +163,6 @@ normFile = (e) => {
       </div>
     );
   }
-
-
 }
+
 export default Form.create()(CreateEventPage);

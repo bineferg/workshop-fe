@@ -1,8 +1,11 @@
 import React from 'react';
 import ShowMoreText from 'react-show-more-text';
+import Dropzone from 'react-dropzone';
+import trashcan from '../assets/trashcan.png';
 import { Form, Input, Icon, Upload, Modal } from 'antd';
 
-const workshopURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/workshops"
+const workshopURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/workshops";
+const uploadURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/upload";
 const imageURL = "https://workshop-objects-1.s3.amazonaws.com/workshops/";
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -12,107 +15,194 @@ class AdminWorkshopList extends React.Component {
 
   constructor(props) {
 		super(props);
-    this.renderItem = this.renderItem.bind(this);
     this.executeOnClick = this.executeOnClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.executeOnClick = this.executeOnClick.bind(this);
+    this.handleCancelEdit = this.handleCancelEdit.bind(this);
+    this.handlePreview = this.handlePreview.bind(this);
+    this.handlePhotoChange = this.handlePhotoChange.bind(this);
+    this.handleEditField = this.handleEditField.bind(this);
     this.toggleEditing = this.toggleEditing.bind(this);
     this.handleCancelEdit = this.handleCancelEdit.bind(this);
     this.state = {
-    previewVisible: false,
-    previewImage: '',
-    fileListMap: this.props.fileListMap,
-    editing: '',
+      fileListMap: this.props.fileListMap,
+      editing: '',
     };
 	}
 
+  removePhoto = (e, id) => {
+      e.stopPropagation();
+      var fileListMap = this.state.fileListMap;
+      fileListMap[id] = [];
+      this.setState({filListMap: fileListMap})
+    }
+
+  handlePhotoChange = (files, id) => {
+      var fileListMap = this.state.fileListMap
+      fileListMap[id] = files
+      this.setState({fileListMap: fileListMap, fileChanged: true})
+  }
+
+  handlePreview(file){
+    if(file.url){
+      return file.url
+    }
+    return file.preview
+  }
 
   executeOnClick(isExpanded) {}
 
-  handleDelete(id) {
-    fetch(workshopURL + '?workshop_id=' + id, {
-    method: 'delete'
-    })
-    .then(response => response.json())
-    .catch (function (error) {
-			console.log('Request failed', error);
-			return
-    });
+  handleDelete = (id) => {
+      this.setState({
+        deleting: true
+      })
+      console.log(id)
+      fetch(workshopURL + '?workshop_id=' + id, {
+      method: 'delete',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(success => this.setState({
+        deleting: false,
+      }))
+      .catch (function (error) {
+  			console.log(error)
+      });
+      this.setState({
+        deleted: true,
+      })
   }
+
   handleCancelEdit(){
     this.setState({editing:''});
   }
 
-  handleCancel = () => this.setState({ previewVisible: false })
+  putPhotoCall(files, id){
+    if(!this.state.fileChanged){
+      this.setState({photoCall: true})
+    }
 
-  handlePreview = (file) => {
-    this.setState({
-      previewImage: file.url || file.thumbUrl,
-      previewVisible: true,
-    });
+    return new Promise(() => {
+      fetch(uploadURL + '/workshops/'+ id+'.jpg', {
+          method:'GET',
+        })
+        .then(d => d.json())
+        .then((d) => {
+          fetch(d.url, {
+            method: 'PUT',
+            body: files[0]
+          })
+          .then((response) => {
+            if(response.ok){
+              this.setState({photoCall: true})
+            }
+          })
+        })
+      }
+    )
   }
 
-  handleChange = ({ fileList }) => this.state.fileListMap[fileList.uid] = fileList;
-
-  handleUpdateItem= (e) => {
-    console.log(e)
-   let newState = {};
-   for (var key in e.target) {
-     newState[key.name] = e.target[key].value;
+  updateServerCall(payload){
+    return new Promise(() => {
+      fetch(workshopURL+ '?workshop_id='+payload.WorkshopID, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      }).then((response) => {
+        if(response.ok){
+          this.setState({serverCall: true})
+        }
+      })
+    })
    }
-   this.setState(newState);
-   var payload = {
-     workshop_id: this.state.workshopID,
-     Name: this.state.workshopName,
-     Description: this.state.description,
-     Time : this.state.workshopTimes,
-     Cost: this.state.workshopCost,
-     Cap: parseInt(this.state.workshopCap),
-     Location: defaultLocation,
-   }
-   console.log(payload);
-
-   /*fetch(workshopURL, {
-   method: 'PUT',
-   headers: {
-   'Accept': 'application/json',
-   'Content-Type': 'application/json',
-   },
-   body: JSON.stringify(payload)
-   }).then((response) => {
-       if (response.ok) {
-         this.setState({createSuccess: true})
-       }
-   })
-   .catch(function(error){
-     console.log('Request failed', error);
-     return;
-   });*/
- };
 
 
-  handleEditField( event ) {
-    if ( event.keyCode === 13 ) {
+  doAllUpdates(payload, files){
+    return Promise.all([this.putPhotoCall(files, payload.WorkshopID), this.updateServerCall(payload)])
+  }
+
+  handleUpdateItem(item){
+    return event => {
+      var payload = {
+        WorkshopID: item.WorkshopID,
+        name: item.Name,
+        description: item.Description,
+        cost: item.Cost,
+        cap: parseInt(item.Cap, 10),
+        time: item.Time,
+        location: item.Location,
+      }
+      console.log(this.state.updated.length)
+      for(var i=0; i<this.state.updated.length; i++){
+        console.log("in loop")
+        var field = this.state.updated[i]
+
+        if (field["Name"]){
+          console.log(field["Name"])
+          payload.name = field["Name"]
+          continue
+        }
+        if (field["Description"]){
+          payload.description = field["Description"]
+          continue
+        }
+        if (field["Cost"]){
+          payload.cost=field["Cost"]
+          continue
+        }
+        if (field["Cap"]){
+          payload.cap=parseInt(field["Cap"], 10)
+          continue
+        }
+        if (field["Time"]){
+          payload.time=field["Time"]
+          continue
+        }
+
+      }
+      payload.location = item.Location
+
+      this.doAllUpdates(payload, this.state.fileListMap[payload.WorkshopID])
+      .then(([photoResp, payloadResp]) =>{
+        console.log(photoResp, payloadResp)
+      })
+    }
+ }
+
+
+  handleEditField(event ) {
       let target = event.target,
-          update = {};
+      update = {};
 
+      /* set id */
       update.id = this.state.editing;
       update[ target.name ] = target.value;
-
-      /*this.handleUpdate( update );*/
-    }
+      if(this.state.updated.length === 0) {
+        this.state.updated.push(update)
+        return
+      }
+      var newUpdated = new Array()
+      newUpdated.push(update)
+      for(var i=0; i<this.state.updated.length; i++){
+        var field = this.state.updated[i]
+        if (field[target.name]){
+            continue
+        }
+        newUpdated.push(field)
+      }
+      this.setState({updated: newUpdated})
   }
 
   toggleEditing( itemId ) {
-    return this.setState( { editing: itemId } );
+    return this.setState( { editing: itemId, updated: new Array() } );
   }
 
   renderOrEditItem(d){
-
-    var previewVisible = this.state.previewVisible;
-    var previewImage = this.state.previewImage;
     const fileList = this.state.fileListMap[d.WorkshopID];
-
     const uploadButton = (
       <div>
         <Icon type="plus" />
@@ -137,7 +227,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Name }` }
-              name="name"
+              name="Name"
               defaultValue={ d.Name }
             />
           </div>
@@ -148,7 +238,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Time }` }
-              name="time"
+              name="Time"
               defaultValue={ d.Time }
             />
           </div>
@@ -159,7 +249,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Cost }` }
-              name="cost"
+              name="Cost"
               defaultValue={ d.Cost }
             />
           </div>
@@ -170,7 +260,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Cap }` }
-              name="cap"
+              name="Cap"
               defaultValue={ d.Cap }
             />
           </div>
@@ -181,7 +271,7 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Location }` }
-              name="location"
+              name="Location"
               defaultValue={ d.Location }
             />
           </div>
@@ -196,27 +286,30 @@ class AdminWorkshopList extends React.Component {
               type="text"
               className="f6 mb2 mr5"
               ref={ `title_${ d.Description }` }
-              name="description"
+              name="Description"
               defaultValue={ d.Description }
             />
           </div>
           <div className="clearfix dtc pl3">
           <h1 className="f6 f5-ns fw6 lh-title black">Event Image</h1>
-         <Upload
-           action="//jsonplaceholder.typicode.com/posts/"
-           listType="picture-card"
-           fileList={fileList}
-           onPreview={this.handlePreview}
-           onChange={this.handleChange}
-         >
-           {fileList.length >= 3 ? null : uploadButton}
-         </Upload>
-         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-           <img alt="example" style={{ width: '100%' }} src={previewImage} />
-         </Modal>
+          <Dropzone
+            onDrop={ (files) => this.handlePhotoChange(files, d.WorkshopID) }
+            className="uploadBox"
+          >
+          {fileList.length > 0 ? <div>
+                <div>
+                {fileList.map((file) =>
+                    <div>
+                    <img src={trashcan} className="uploadImgRm trashIcon" onClick={(e) => this.removePhoto(e, d.WorkshopID)}/>
+                      <img src={this.handlePreview(file)} className="uploadBoxPreview" />
+
+                    </div>)}
+                </div>
+          </div> : uploadButton}
+        </Dropzone>
          </div>
             <div className="pb3 pt3">
-            <button className="f6 button-reset ba b--black-10 dim pointer pv2 pa2 black-60 bg-green" onClick={ this.handleUpdateItem } label="Update Item"> Update </button>
+            <button className="f6 button-reset ba b--black-10 dim pointer pv2 pa2 black-60 bg-green" onClick={ this.handleUpdateItem(d) } label="Update Item"> Update </button>
             </div>
             <div className="pb3">
             <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv2 pa2 white-80" onClick={ this.handleCancelEdit } label="Cancel Edit"> Cancel </button>
@@ -273,7 +366,7 @@ class AdminWorkshopList extends React.Component {
            <button className="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" type="submit" onClick={ this.toggleEditing.bind( null, d.WorkshopID ) }>+ Edit</button>
          </form>
          <form className="w-100 tr pr3">
-           <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv1 white-80" type="submit" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.handleDelete(d.WorkshopID) } }>- Delete</button>
+           <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv1 white-80" onClick={() => { if (window.confirm('Are you sure you wish to delete this item: ' + d.Name + '?')) this.handleDelete(d.WorkshopID ) } }>- Delete</button>
          </form>
        </div>
       </article>
@@ -281,66 +374,19 @@ class AdminWorkshopList extends React.Component {
 
   }
 
-
-
-  renderItem(d){
-    var imgName="https://workshop-objects-1.s3.amazonaws.com/workshops/"+d.WorkshopID+".jpg"
-    return(
-    <article className="dt w-100 bb b--black-05 pb2 mt2" href="#0">
-     <div className="dtc w2 w3-ns ">
-      <h1 className="f6 f5-ns fw6 lh-title black ">Image </h1>
-       <img src={imgName} className="ba b--black-10 db br2 w2 w3-ns h2 h3-ns"/>
-     </div>
-     <div className="dtc pl2">
-       <h1 className="f6 f5-ns fw6 lh-title black ">ID </h1>
-       <h2 class="f6 fw4 mt0 mb0 black-60">{d.WorkshopID}</h2>
-     </div>
-     <div className="dtc  pl2">
-       <h1 className="f6 f5-ns fw6 lh-title black ">Title</h1>
-       <h2 class="f6 fw4 mt0 mb0 black-60">{d.Name}</h2>
-     </div>
-     <div className="dtc pl2">
-       <h1 className="f6 f5-ns fw6 lh-title black ">Description </h1>
-       <h2 class="f6 fw4 mt0 mb0 black-60">
-       <ShowMoreText
-             lines={3}
-             more='Show more'
-             less='Show less'
-             anchorClass=''
-             onClick={this.executeOnClick(true)}>
-             {d.Description}
-       </ShowMoreText>
-       </h2>
-     </div>
-     <div className="dtc  pl2">
-       <h1 className="f6 f5-ns fw6 lh-title black ">Time </h1>
-       <h2 class="f6 fw4 mt0 mb0 black-60">{d.Time}</h2>
-     </div>
-     <div className="dtc  pl2">
-       <h1 className="f6 f5-ns fw6 lh-title black ">Cost </h1>
-       <h2 class="f6 fw4 mt0 mb0 black-60">{d.Cost}</h2>
-     </div>
-     <div className="dtc  pl2">
-       <h1 className="f6 f5-ns fw6 lh-title black ">Cap </h1>
-       <h2 class="f6 fw4 mt0 mb0 black-60">{d.Cap}</h2>
-     </div>
-     <div className="dtc  pl2">
-       <h1 className="f6 f5-ns fw6 lh-title black ">Location </h1>
-       <h2 class="f6 fw4 mt0 mb0 black-60">{d.Location}</h2>
-     </div>
-     <div className="dtc ">
-       <form className="w-100 tr pr3">
-         <button className="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" type="submit">+ Edit</button>
-       </form>
-       <form className="w-100 tr v-bottom pr3">
-         <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv1 white-80" type="submit" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.handleDelete(d.id) } }>- Delete</button>
-       </form>
-     </div>
-    </article>
-
-  );}
-
   render(){
+    if(this.state.deleting){
+      return <p>Deleting...</p>
+    }
+    if(this.state.deleted){
+      window.location.reload();
+      this.setState({deleted: false})
+    }
+    if(this.state.photoCall && this.state.serverCall){
+      this.setState({updateSuccess: false, photoCall: false, severCall: false, fileChanged: false})
+      window.location.reload();
+    }
+
     return (
     <div className="mw8 pb5 center">
     {this.props.data.map((item) => this.renderOrEditItem(item))}

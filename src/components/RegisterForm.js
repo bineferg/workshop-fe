@@ -102,8 +102,6 @@ render() {
  }
 
  return(
-
-
  <Form layout={"vertical"} onSubmit={this.handleSubmit} className="black-80">
    <div className="measure center dib w-100 ">
      <div className="f6 db ml3">
