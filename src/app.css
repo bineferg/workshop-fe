@@ -88,7 +88,7 @@ body {
   width: 100%
 }
 .sticky-footer {
-  position: absolute;
+  position: static;
   bottom: 0;
   overflow: hidden;
   width: 100%
@@ -165,6 +165,12 @@ body {
 .pt3 {
     padding-top: 1rem;
 }
+.pt4 {
+    padding-top: 2rem;
+}
+.pt6 {
+    padding-top: 6rem;
+}
 .mv5 {
     margin-top: 4rem;
     margin-bottom: 4rem;
@@ -190,6 +196,15 @@ body {
 }
  .flex-column {
      flex-direction: column;
+}
+.justify-center{
+  justify-content: center;
+}
+.alc{
+  align-items: center;
+}
+.flex-row {
+    flex-direction: row;
 }
  .baskerville {
      font-family: baskerville, serif;
@@ -305,7 +320,56 @@ body {
     opacity: .8;
 }
 .bg-white {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
+}
+.bg-red {
+  background-color: rgb(183, 7, 7);
+}
+.cursor{
+  cursor: pointer;
+}
+.uploadBox {
+  cursor: pointer;
+  position: relative;
+  display:table;
+  vertical-align:middle;
+  text-align:center;
+  border: 1px dashed #555;
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: 15px;
+  padding: 10px 10;
+  width: 110px;
+  height: 110px;
+  z-index: 1;
+}
+.uploadBoxPreview {
+  height: 100px;
+  display:inline-table;
+  vertical-align: middle;
+  flex: auto;
+}
+.uploadBoxPreview:hover {
+  -webkit-opacity: 0.25;
+  -moz-opacity: 0.25;
+  opacity: 0.25;
+  transition: background 0.5s ease-in-out;
+}
+.uploadBox:hover .uploadImgRm {
+  display: block;
+  transition: background 0.5s ease-in-out;
+}
+
+.uploadImgRm {
+  padding-top: 7px;
+	padding-right: 7px;
+	position: absolute;
+	right: 0;
+	top: 0;
+  z-index: 3;
+  display: none;
+}
+.trashIcon {
+  max-width: 12%;
 }
  .measure {
      max-width: 30em;
@@ -315,6 +379,9 @@ body {
 }
 .measure-narrow {
     max-width: 20em;
+}
+.measure-home {
+  max-width: 40em;
 }
  .measure-cb {
      max-width: 50em;
@@ -417,6 +484,9 @@ body {
  .w3 {
      width: 10rem;
 }
+.w8 {
+    width: 30rem;
+}
  .w-100 {
      width: 100%;
 }
@@ -432,12 +502,18 @@ body {
 .v-mid {
     vertical-align: middle;
 }
+.v-bottom {
+    vertical-align: bottom;
+}
  .black-60 {
      color: rgba(0, 0, 0, .6);
 }
  .bt {
      border-top-style: solid;
      border-top-width: 1px;
+}
+.bg-green{
+  background-color: rgb(206, 239, 174);
 }
  .black {
      color: #000;
@@ -457,9 +533,9 @@ body {
  .pa2 {
      padding: .5rem;
 }
-    .pv6 {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+.pv6 {
+    padding-top: 8.5rem;
+    padding-bottom: 8.5rem;
 }
  .pa3 {
      padding: 1rem;
@@ -485,6 +561,9 @@ body {
 }
 .pb5 {
     padding-bottom: 4.5rem;
+}
+.pb6 {
+    padding-bottom: 5.25rem;
 }
 .pb10 {
     padding-bottom: 10.75rem;
@@ -519,6 +598,9 @@ body {
  .mr3 {
      margin-right: 4rem;
 }
+.mr10 {
+    margin-right: 10rem;
+}
 .mr2 {
     margin-right: 2.5rem;
 }
@@ -540,6 +622,9 @@ body {
  .mt2 {
      margin-top: .75rem;
 }
+.mt1.8{
+  margin-top: 1.8rem;
+}
 .mt4 {
     margin-top: 1.25rem;
 }
@@ -552,8 +637,14 @@ margin-top: 5.25rem;
 .mt10 {
 margin-top: 7.25rem;
 }
+.mt15 {
+margin-top: 10rem;
+}
 .mt5 {
 margin-top: 2.25rem;
+}
+.mt5s{
+  margin-top: 2.45rem;
 }
 .mt6 {
   margin-top: 3.4rem;
@@ -580,8 +671,33 @@ margin-top: 2.25rem;
      overflow: hidden;
      text-overflow: ellipsis;
 }
+.overflow-auto {
+    overflow: auto;
+}
+
+.stripe-dark:nth-child(odd) {
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.tl {
+    text-align: left;
+}
+
  .f6 {
      font-size: .995rem;
+}
+.bg-black-10 {
+    background-color: rgba(0, 0, 0, .1);
+}
+.bg-black {
+    background-color: #000;
+}
+.bg-black-80 {
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.bg-black-05 {
+    background-color: rgba(0, 0, 0, .05);
 }
  .f1 {
      font-size: 3rem;
@@ -630,6 +746,7 @@ margin-top: 2.25rem;
      border-bottom:2px solid rgba(0,0,0,0.1);
      padding-bottom:2px;
      padding-top:2px;
+     padding-left: 0;
      background-color: rgba(255, 255, 255, 0);
 }
 .pr2s {
@@ -638,6 +755,11 @@ margin-top: 2.25rem;
 .bg-light-gray {
     background-color: #eee;
 }
+
+  .white {
+    color: #fff;
+  }
+
 
 .bg-near-white {
     background-color: #f4f4f4;
@@ -729,13 +851,34 @@ margin-top: 2.25rem;
     .w-50-ns {
         width: 50%;
     }
+    .dt-ns {
+        display: table;
+    }
+
+    .dtc-ns {
+        display: table-cell;
+    }
+
+    .dt--fixed-ns {
+        table-layout: fixed;
+        width: 100%;
+    }
 }
 
  .fw2 {
      font-weight: 200;
 }
+.fw3 {
+    font-weight: 700;
+}
 .w-50-ns {
     width: 50%;
+}
+.top50{
+  top: 50%
+}
+.left50:{
+  left: 50%
 }
  .lh-copy {
      line-height: 1.5;
@@ -810,9 +953,6 @@ margin-top: 2.25rem;
 .pa4 {
     padding: 2rem;
 }
-.mw9 {
-    max-width: 96rem;
-}
  .mt0 {
      margin-top: 0;
 }
@@ -848,6 +988,16 @@ margin-top: 2.25rem;
 .pl5 {
     padding-left: 4rem;
 }
+.pl8 {
+    padding-left: 19rem;
+}
+.pl3 {
+    padding-left: 3rem;
+}
+.pl2 {
+    padding-left: 2rem;
+}
+
 .pl6 {
     padding-left: 5.5rem;
 }
@@ -1076,6 +1226,7 @@ margin-top: 2.25rem;
      position: relative;
      list-style: none;
      padding: 6px 12px;
+     height: auto;
      cursor: pointer;
 }
  .react-tabs__tab--selected {

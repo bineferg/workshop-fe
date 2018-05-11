@@ -16,16 +16,6 @@ class WorkshopPage extends React.Component {
     this.sortWorkshops = this.sortWorkshops.bind(this);
  }
 
-shuffleArray(array) {
-  let i = array.length - 1;
-  for (; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-}
 sortWorkshops(workshops) {
   workshops.sort(function(a, b) {
       a = new Date(a.CreatedAt);
