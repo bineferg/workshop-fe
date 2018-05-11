@@ -22,12 +22,12 @@ class StudioPage extends React.Component {
    return (
    <article className="bg-white cf">
      <div className="vh-75 cover mt5 bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
-     <p className="tc f2 mb4 fw1 avenir ">The Workshop Studio</p>
+     <p className="tc f2 mb4 fw1 avenir mt5">The Workshop Studio</p>
      <div className="fl w-67 bg-near-white"></div>
 
-  <div className="fl w-67 bg-near-white">
-    <h1 className="plr5 f2 mb4 fw1 avenir">Equipment and Gear</h1>
-     <div className="pa5 dark-gray">
+  <div className="fl w-67 h-100 bg-near-white plr5">
+    <h1 className="plr5 f2 fw1 avenir mt5">Equipment and Gear</h1>
+     <div className="dark-gray">
      <p>The Workshop offers studio space for rent.</p>
      <p>Equipment you will find there includes: </p>
       <ul>
@@ -53,7 +53,7 @@ class StudioPage extends React.Component {
       <p>*Please note this is a shared space, please be mindful of other artists when setting up and packing up.*</p>
     </div>
   </div>
-  <div className="fl w-33 pb6 dib vh-100 bg-light-gray tc">
+  <div className="fl w-33 dib h-100 bg-light-gray tc">
     <h1 className="plr5 f3 mt5 fw3 avenir">10 Hrs per Week</h1>
     <p className="mb2">40€ per Month</p>
     <h1 className="plr5 f3 mt5 fw3 avenir">25 Hrs per Week</h1>
