@@ -17,7 +17,7 @@ const gear = [
   {
     id: "djm6",
     title: "Pioneer DJM-600",
-    price: "5 €/hr",
+    price: "15 €/day",
     img: djm600,
     description: "The DJM-600 is a 4 channel effects mixer with a range of beat effects and channel cross fade options. This mixer is also acts as a beat sampler using Auto Loop Play to loop. All cables and adaptors are included with the rental price."
 
@@ -25,21 +25,21 @@ const gear = [
   {
     id: "djm7",
     title: "Pioneer DJM-750",
-    price: "5 €/hr",
+    price: "17 €/day",
     img: djm750,
     description: "The DJM-750 is a 4 channel effects mixer with a range of beat effects and channel cross fade options. This has the 13 Beat FX and Level/Depth knob and uses 32-bit digital signal processor. All cables and adaptors are included with the rental price."
   },
   {
     id:"djm9",
     title: "Pioneer DJM-900 Nexus",
-    price: "7 €/hr",
+    price: "20 €/day",
     img: djm900,
     description: "The Pioneer DJM-900 is a 13 channel-assignable Beat FX mixer with six sound FX. The mixer has 4 input and output stereo signals and 24-bit proccessing."
   },
   {
     id:"alhez",
     title: "Allen and Heath Zed14",
-    price: "5 €/hr",
+    price: "15 €/day",
     img: allenheath,
     description: "The Allen and Heath Zed14 has a configurable USB audio in/out with 6 line inputs, 4 stereo inputs and EQ. It has 69dB gain range for the XLR signal and all inputs have level control."
 
@@ -47,23 +47,15 @@ const gear = [
   {
     id: "trifipr",
     title: "M-Audio Trigger Finger Pro",
-    price: "5 €/hr",
+    price: "5 €/day",
     img: maudio,
     description: "The M-Audio Trigger Finger Pro is a pad controller with step sequencer. It has 16 velocity and pressure RGB pads and multiple MIDI connections."
 
   },
   {
-    id:"nitk",
-    title: "Native Instruments Traktor Kontrol S2",
-    price: "7 €/hr",
-    img: nitks2,
-    description: "The Traktor Kontrol S2 is a 2-Deck DJ system for Mac and PC. The controller inculdes a two channel mixer and many DJ effects. In addition it has 3-band EQ and a remix knob in addition to the 2 deck channels. The software for this controller is not available for rent."
-
-  },
-  {
     id:"pcdj",
     title: "PIONEER CDJ-2000NXS2 (x2)",
-    price: "7 €/hr",
+    price: "50 €/day",
     img: cdj,
     description: "These CDJs have 96 kHz/24-bit digital signal processing and sound card. There are 8 hot cues, MIDI Control, Audio Standby, DJPro Link, 1 Digital and 1 Analogue output and 2 USB ports."
 
@@ -71,7 +63,7 @@ const gear = [
   {
     id:"piset",
     title: "Pioneer Set",
-    price: "20 €/hr",
+    price: "65 €/day",
     img: pionset,
     description: "Inclues 2 Pioneer CDJ-2000 NXS2 and the Pioneer DJM-900 Nexus. All cables and adaptors needed included in the rental price."
 
@@ -79,17 +71,9 @@ const gear = [
   {
     id:"jcss",
     title: "JustIn Cubus 21 (Sub+Satellite Units)",
-    price: "10 €/hr",
+    price: "20 €/day",
     img: cubus,
     description: "The speakers are equipped with 80 Watts RMS per @ 8Ohm, 150 W Max, 2-way system with a frequency range of 155 – 22,000 Hz and a maximum sound pressure of 130 dB. The subwoofer is equipped with 250 watts RMS power @ 4 ohm and 500 watt max 10 woofer. The frequency Range is 50 – 160 Hz with a sound pressure maximum of 123 dB."
-
-  },
-  {
-    id:"odcs",
-    title: "ODYUSA Case (x3)",
-    price: "3 €/hr",
-    img: odyusa,
-    description: "Hard case for CDJ, mixer, or controller audio equipment transport."
 
   },
 ]

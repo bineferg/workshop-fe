@@ -79,6 +79,7 @@
 body {
   margin: 0px;
   padding:0px;
+  height: 100%;
   position: relative;
 }
 .sticky {
@@ -106,6 +107,10 @@ body {
 }
  .outline {
      outline: 1px solid;
+}
+.col{
+  display: flex;
+  flex-wrap:wrap
 }
  .cf:before, .cf:after {
      content: " ";
@@ -381,7 +386,7 @@ body {
     max-width: 20em;
 }
 .measure-home {
-  max-width: 40em;
+  max-width: 32em;
 }
  .measure-cb {
      max-width: 50em;
@@ -477,6 +482,9 @@ body {
 }
  .mw6 {
      max-width: 40rem;
+}
+.mw6s {
+  max-width: 32rem;
 }
  .mw5 {
      max-width: 16rem;
@@ -996,6 +1004,9 @@ margin-top: 2.25rem;
 }
 .pl2 {
     padding-left: 2rem;
+}
+.list {
+    list-style-type: none;
 }
 
 .pl6 {
