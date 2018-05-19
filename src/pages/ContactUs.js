@@ -85,11 +85,11 @@ class ContactUsPage extends React.Component {
    <article className="bg-white cf">
      <div className="vh-75 cover mt5s bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
      <p className="tc f2 mb4 mt5 fw1 avenir ">Contact Us </p>
-     <div className="fl w-67 bg-near-white"></div>
+     
 
-  <div className="fl w-67 plr5 h-100 bg-near-white">
-    <h1 className="plr5 f2 mt4 fw1 avenir">Get in Touch</h1>
-     <div className="dark-gray">
+  <div className="fl w-67 h-100 bg-near-white">
+    <h1 className="f2 mt4 fw1 avenir pl10">Get in Touch</h1>
+     <div className="dark-gray plr5">
      <Form layout={"vertical"} onSubmit={this.handleSubmit} className="black-80">
        <div className="measure center dib w-100 ">
          <div className="f6 db ml3">

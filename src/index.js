@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
         )} />
       <Route exact path="/gear/:gearID" component={Reserve}/>
       <Route path= "/studio" component={StudioPage} />
-      <Route path= "/admin" component={AdminPage} />
     	</Switch>
      </div>
    </Router>
