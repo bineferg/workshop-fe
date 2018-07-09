@@ -2,13 +2,10 @@ import React from 'react';
 import ShowMoreText from 'react-show-more-text';
 import Dropzone from 'react-dropzone';
 import trashcan from '../assets/trashcan.png';
-import { Form, Input, Icon, Upload, Modal } from 'antd';
 
 const workshopURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/workshops";
 const uploadURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/upload";
 const imageURL = "https://workshop-objects-1.s3.amazonaws.com/workshops/";
-const FormItem = Form.Item;
-const { TextArea } = Input;
 const defaultLocation = "ForsterStrasse 51"
 
 class AdminWorkshopList extends React.Component {
@@ -205,8 +202,9 @@ class AdminWorkshopList extends React.Component {
     const fileList = this.state.fileListMap[d.WorkshopID];
     const uploadButton = (
       <div>
-        <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
+        // Used to be Icon
+        <span>+</span>
+        <div>Upload</div>
       </div>
     );
 
@@ -222,7 +220,7 @@ class AdminWorkshopList extends React.Component {
           </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Title </h1>
-            <Input
+            <input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
@@ -233,7 +231,7 @@ class AdminWorkshopList extends React.Component {
           </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Time </h1>
-            <Input
+            <input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
@@ -244,7 +242,7 @@ class AdminWorkshopList extends React.Component {
           </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Cost </h1>
-            <Input
+            <input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
@@ -255,7 +253,7 @@ class AdminWorkshopList extends React.Component {
           </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Cap </h1>
-            <Input
+            <input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
@@ -266,7 +264,7 @@ class AdminWorkshopList extends React.Component {
           </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Location </h1>
-            <Input
+            <input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
@@ -280,7 +278,7 @@ class AdminWorkshopList extends React.Component {
 
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black ">Description </h1>
-            <TextArea
+            <textarea
               onKeyDown={ this.handleEditField }
               autosize={{ maxRows: 1000 }}
               type="text"

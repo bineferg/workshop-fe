@@ -1,10 +1,7 @@
 import React from 'react';
 import bgimage from '../assets/background.bluegreen.jpg';
 
-
-
 class HomePage extends React.Component {
-
   constructor(props){
     super(props)
   }

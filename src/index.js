@@ -14,23 +14,25 @@ import ContactUsPage from './pages/ContactUs.js';
 import history from './components/history.js';
 import './app.css';
 import registerServiceWorker from './registerServiceWorker.js';
-import {Menu, Dropdown} from 'antd';
 import Auth from './components/Auth.js';
 
+import styled from 'styled-components'
+import { space, width, fontSize, color } from 'styled-system'
 
 document.addEventListener('DOMContentLoaded', function() {
   const onClick = function ({ key }) {
     history.push("/"+key)
   };
 
-  const menu = ( <Menu onClick={onClick}>
-    <Menu.Item key="gear">GEAR
+// Menu
+  const menu = ( <div onClick={onClick}>
+    <div key="gear">GEAR
     <Link to="/gear"className="no-underline avier black fl"/>
-    </Menu.Item>
-    <Menu.Item key="studio">SPACE
+    </div>
+    <div key="studio">SPACE
     <Link to="/studio"className="no-underline avier black fl"/>
-    </Menu.Item>
-  </Menu>
+    </div>
+  </div>
 )
 
   const auth = new Auth();
@@ -44,24 +46,29 @@ document.addEventListener('DOMContentLoaded', function() {
    <Router history={history}>
 
     <div className="avenir">
-     <Menu>
+    // Menu component
+     <div>
      <div className="tc main-nav sticky">
 
-    <Link to="/" className="no-underline avier black fl"><p className="f-home pl2 f2 fw1 mt0 mb0">WORKSHOP</p>
+    <Link to="/">
+      <p>
+        WORKSHOP
+      </p>
     </Link>
       <Link to="/contact" className="link  hover-logo-blue black f6 dib mr2 mt4 fr">CONTACT US</Link>
       <Link to="/space" className="link  hover-logo-green black f6 dib mr2 mt4 fr">THE SPACE</Link>
-      <Dropdown overlay={menu}>
+      // Used to be a Dropdown component
+      <div overlay={menu}>
         <a className="ant-dropdown-link" className="link cursor hover-logo-blue black f6 dib mr2 mt4 fr">
           RENTAL
         </a>
-      </Dropdown>
+      </div>
       <Link to="/events" className="link  hover-logo-blue black f6 dib mr2 mt4 fr">EVENTS</Link>
       <Link to="/workshops" className="link hover-logo-green black f6 dib mr2 mt4 fr">WORKSHOPS</Link>
 
 
 	</div>
-  </Menu>
+  </div>
     <Switch>
     	<Route exact path="/" render={(props)=> (
         <HomePage auth={auth}/>

@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DatePicker, Icon, Form, Input, TimePicker, Checkbox } from 'antd';
+// import { DatePicker, Icon, Form, Input, TimePicker, Checkbox } from 'antd';
 import moment from 'moment';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 import ErrPage from '../pages/ErrPage.js';
 
 
 const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/mail"
 
-const FormItem = Form.Item;
-const { TextArea } = Input;
+// const FormItem = Form.Item;
+// const { TextArea } = Input;
 
 class Reserve extends React.Component {
   constructor(props){
@@ -126,34 +126,35 @@ render() {
         <div className="fl w-100 bg-near-white">
           <h1 className="f2 mb4 fw1 pl10 avenir">Rental Inquiry</h1>
           <div className="pa5 dark-gray">
+          {/* FIXME:
           <Form layout={"vertical"} onSubmit={this.handleSubmit} className="pa4 black-80">
             <div className="fl w-50">
               <div className="f6 mb2 mr5">
-                <FormItem label="First Name" required="true" >
-                  <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />} name="firstName" placeholder="First Name" required="true" onChange={this.handleChange} />
-                </FormItem>
+                  <FormItem label="First Name" required="true" >
+                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />} name="firstName" placeholder="First Name" required="true" onChange={this.handleChange} />
+                  </FormItem>
               </div>
               <div className="f6 mb2 mr5">
-                <FormItem label="Last Name" required="true">
-                  <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />} name="lastName" placeholder="Last Name" required="true" onChange={this.handleChange}/>
-                </FormItem>
+                  <FormItem label="Last Name" required="true">
+                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />} name="lastName" placeholder="Last Name" required="true" onChange={this.handleChange}/>
+                  </FormItem>
               </div>
               <div className="f6 mb2 mr5">
-                <FormItem label="E-Mail" required="true">
-                  <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)'}} />} name="email" placeholder="E-Mail" type="email" required="true" onChange={this.handleChange}/>
-                </FormItem>
+                  <FormItem label="E-Mail" required="true">
+                    <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)'}} />} name="email" placeholder="E-Mail" type="email" required="true" onChange={this.handleChange}/>
+                  </FormItem>
               </div>
               <div className="mr5">
-                <FormItem label="Special Requests" name="comments">
-                    <TextArea placeholder="Please let us know any of special accommodations. (Optional)" autosize={{ minRows: 8, maxRows: 1000 }} onChange={this.handleChange} name="comments"/>
-                </FormItem>
+                  <FormItem label="Special Requests" name="comments">
+                      <TextArea placeholder="Please let us know any of special accommodations. (Optional)" autosize={{ minRows: 8, maxRows: 1000 }} onChange={this.handleChange} name="comments"/>
+                  </FormItem>
               </div>
             </div>
             <div className="fl w-50 vh-100">
               <div className="flex">
-                <FormItem label="Pickup Date" className="mr3" required="true">
-                  <DatePicker onChange={this.handlePUDateChange} type="datetime" required="true"/>
-                </FormItem>
+                  <FormItem label="Pickup Date" className="mr3" required="true">
+                    <DatePicker onChange={this.handlePUDateChange} type="datetime" required="true"/>
+                  </FormItem>
                 <FormItem label="Pickup Time" required="true">
                   <TimePicker onChange={this.handlePUTimeChange} defaultValue={moment('00:00', format)} format={format} required="true" />
                 </FormItem>
@@ -176,6 +177,7 @@ render() {
             </div>
           </div>
         </Form>
+        */}
       </div>
     </div>
     </article>

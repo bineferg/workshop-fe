@@ -1,13 +1,10 @@
 import React from 'react';
 import ShowMoreText from 'react-show-more-text';
-import { Form, Input, Modal, Icon } from 'antd';
 import Dropzone from 'react-dropzone';
 import trashcan from '../assets/trashcan.png';
 
 const eventsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/events";
 const uploadURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/upload";
-const FormItem = Form.Item;
-const { TextArea } = Input;
 const imageURL = "https://workshop-objects-1.s3.amazonaws.com/events/";
 const defaultLocation = "ForsterStrasse 51"
 
@@ -49,7 +46,7 @@ class AdminEventList extends React.Component {
   }
 
   executeOnClick(isExpanded) {
-    
+
   }
 
   handleCancelEdit(){
@@ -188,8 +185,13 @@ class AdminEventList extends React.Component {
     const fileList = this.state.fileListMap[d.id];
     const uploadButton = (
       <div>
-        <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
+        // Used to be an Icon
+        <span>+</span>
+        //<div className="ant-upload-text">Upload</div>
+        <div>
+         <label for="text">Upload text:</label>
+         <input type="file" name="text" />
+        </div>
       </div>
     );
 
@@ -205,7 +207,7 @@ class AdminEventList extends React.Component {
           </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Title </h1>
-            <Input
+            <input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
@@ -216,7 +218,7 @@ class AdminEventList extends React.Component {
           </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Time </h1>
-            <Input
+            <input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
@@ -227,7 +229,7 @@ class AdminEventList extends React.Component {
           </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Cost </h1>
-            <Input
+            <input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
@@ -238,7 +240,7 @@ class AdminEventList extends React.Component {
           </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black">Location </h1>
-            <Input
+            <input
               onKeyDown={ this.handleEditField }
               type="text"
               className="f6 mb2 mr5"
@@ -252,7 +254,7 @@ class AdminEventList extends React.Component {
 
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black ">Description </h1>
-            <TextArea
+            <textarea
               onKeyDown={ this.handleEditField }
               autosize={{ maxRows: 1000 }}
               type="text"
@@ -281,10 +283,10 @@ class AdminEventList extends React.Component {
         </Dropzone>
          </div>
             <div className="pb3 pt3">
-            <button className="f6 button-reset ba b--black-10 dim pointer pv2 pa2 black-60 bg-green" onClick={ this.handleUpdateItem(d) } label="Update Item"> Update </button>
+            <button className="f6 button-reset ba b--black-10 dim pointer pv2 pa2 black-60 bg-green" onClick={ this.handleUpdateItem(d) } label="Update" />
             </div>
             <div className="pb3">
-            <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv2 pa2 white-80" onClick={ this.handleCancelEdit } label="Cancel Edit"> Cancel </button>
+            <button className="f6 button-reset bg-red ba b--black-10 dim pointer pv2 pa2 white-80" onClick={ this.handleCancelEdit } label="Cancel" />
             </div>
       </article>
       </div>

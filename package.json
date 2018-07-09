@@ -23,7 +23,9 @@
     "react-strapmenu": "^0.1.2",
     "react-tabs": "^2.2.1",
     "react-wysiwyg": "^2.2.1",
-    "react-x-editable": "0.0.9-beta"
+    "react-x-editable": "0.0.9-beta",
+    "styled-components": "^3.3.3",
+    "styled-system": "^2.3.5"
   },
   "scripts": {
     "start": "react-scripts start",
