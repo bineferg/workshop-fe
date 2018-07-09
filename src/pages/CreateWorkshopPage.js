@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Form, Input, Button, Modal} from 'antd';
+import { Icon, Form, Input, Button} from 'antd';
 import Dropzone from 'react-dropzone';
 import 'antd/dist/antd.css';
 import trashcan from '../assets/trashcan.png';
@@ -12,11 +12,12 @@ const uploadURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/
 const defaultLocation = "ForsterStrasse 51"
 
 
-class CreateEventPage extends React.Component {
+class CreateWorkshopPage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      fileList: []
+      fileList: [],
+      submitSuccess: false,
     };
   }
 
@@ -47,7 +48,7 @@ class CreateEventPage extends React.Component {
         })
         .then((response) => {
           if(response.ok) {
-            this.setState({photoCall: true})
+            console.log("ok")
           }
         })
       })
@@ -65,7 +66,7 @@ class CreateEventPage extends React.Component {
         body: JSON.stringify(payload)
         }).then((response) => {
           if(response.ok) {
-            this.setState({serverCall: true})
+            console.log("ok")
           }
         })
     })
@@ -95,6 +96,7 @@ class CreateEventPage extends React.Component {
       location: defaultLocation,
     }
       this.makeNewWorkshop(payload, this.state.fileList)
+      this.setState({submitSuccess: true})
     }
 
 
@@ -107,20 +109,21 @@ class CreateEventPage extends React.Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-    if (this.state.photoCall && this.state.serverCall ){
-      this.setState({photoCall: false, serverCall: false})
+    if (this.state.submitSuccess){
       return (
       <div>
-          <h1 className="plr5 f2 mb4 fw1 avenir mt10">Workshop Published!</h1>
-          <br/>
-          <button className="ph3 pv2 logo-green-bg ml3 grow no-underline ba b--black f6" onClick={ () => window.location.reload()}>Admin Center</button>
+      <h1 className="plr5 f2 mb4 fw1 avenir mt10">Workshop Published!</h1>
+      <br/>
+      <div className="fl mr5 mb5">
+      <a className="ph3 pv2 logo-blue-bg ml3 grow no-underline ba b--black f6" onClick={ () => window.location.reload()}>Admin Center</a>
       </div>
-    )
+      </div>
+     )
     }
     return (
       <div className=" pb5 pt6 bg-near-white">
-      <div className="mt10 fl">
-      <button className="ph3 pv2 logo-green-bg ml3 grow no-underline ba b--black f6" onClick={ () => window.location.reload()}>Admin Center</button>
+      <div className="mt10 fl ml3">
+      <a class="f6 link dim br2 ph4 pointer pv2 mb2 dib white bg-black-80" onClick={ () => window.location.reload()}>Admin Center</a>
       </div>
       <center>
       <h2 className="avenir fw1 f1-5 mb0 mr10">Create Workshop</h2>
@@ -172,4 +175,4 @@ class CreateEventPage extends React.Component {
   }
 }
 
-export default Form.create()(CreateEventPage);
+export default Form.create()(CreateWorkshopPage);

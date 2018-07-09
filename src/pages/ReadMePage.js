@@ -1,5 +1,4 @@
 import React from 'react';
-import hands from '../assets/logo-black-white.jpg';
 
 class ReadMePage extends React.Component {
   render(){
@@ -30,10 +29,6 @@ class ReadMePage extends React.Component {
             are not super HQ are better because they take less time to load
             on the site.
           </p>
-          <p class="f5 lh-copy pl3 measure-narrow">
-            The admin center will allow you to upload multiple photos
-            for an event or workshop but please only upload one for now.
-          </p>
           </div>
           <div class="dtc-ns tc pv4 bg-black-10">
           <h1 className="fw6 f3 avenir">General Warning :)</h1>
@@ -45,21 +40,31 @@ class ReadMePage extends React.Component {
           </p>
           </div>
         </div>
-        <div className="mt5">
-        <center>
-          <p className="lh-copy dib mt2 measure w-80 f5 f3-ns black-70 fw4 avenir">
-            I can make improvements to this over time, and just lmk if
-            necessary is missing or something is broken.
+        <div class="dt-ns dt--fixed-ns">
+          <div class="dtc-ns tc pv4 bg-black-10">
+          <h1 className="fw6 f3 avenir">Editing Events and Workshops</h1>
+          <p class="f5 lh-copy pl3 measure-narrow">
+            If you are editing an event or workshop, and you see your update is missing a
+            character, just put a space after the last character in the field.
+            This is a bug I have to fix.
           </p>
-
-        </center>
-
+          </div>
+          <div class="dtc-ns tc pv4 bg-black-05">
+          <h1 className="fw6 f3 avenir">Login/LogOut</h1>
+          <p class="f5 lh-copy pl3 measure-narrow">
+            I know the login logout flow is a little confusing but I can fix that when I have
+            some more time. Just be sure to logout when youre done :)
+          </p>
+          </div>
+          <div class="dtc-ns tc pv4 bg-black-10">
+          <h1 className="fw6 f3 avenir">TODO</h1>
+          <p class="f5 lh-copy pl3 measure-narrow">
+            Gears tab coming soon!
+          </p>
+          </div>
         </div>
-        <center>
-        <img src={hands}/>
-        </center>
       </div>
-    );
+    )
 
   }
 

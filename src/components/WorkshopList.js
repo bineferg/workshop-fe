@@ -44,12 +44,12 @@ class WorkshopList extends React.Component {
 													</p>
 													<p className="f6 ml2 b lh-copy mv0">{d.Time}
 													</p>
-												</div>
+											</div>
 											<div className="w-100 w-60-ns pl3-ns">
 											<h1 className="f3 fw1 avenir mt0 lh-title">{d.Name}</h1>
 											<p className="f6 f5-l lh-copy pb2">{this.handleDescription(d.Description)}</p>
 											<div className="fr pr3">
-											<button className="ph3 pv2 plr3 br-pill pointer no-underline ba b--black bg-transparent link f6 dib" onClick={ () => this.toggleModal(d.Name, d.WorkshopID, d.IsFull)}>Sign Up</button>
+											<button className="ph3 pv2 plr3 br-pill pointer no-underline ba b--black bg-light-gray link f6 dib" onClick={ () => this.toggleModal(d.Name, d.WorkshopID, d.IsFull)}>Sign Up</button>
 											</div>
 											</div>
 											</div>

@@ -31,18 +31,18 @@ class Reserve extends React.Component {
   };
 
   handlePUDateChange(date, datestring) {
-    this.state.pickupDate = datestring;
+    this.setState({pickupDate : datestring})
 
   }
   handlePUTimeChange(time, timestring){
-    this.state.pickupTime = timestring;
+    this.setState({pickupTime: timestring})
 
   }
   handleDODateChange(date, datestring) {
-    this.state.dropoffDate = datestring;
+    this.setState({dropoffDate: datestring})
   }
   handleDOTimeChange(time, timestring) {
-    this.state.dropoffTime = timestring;
+    this.setState({dropoffTime: timestring})
   }
 
   handleSubmit(e){

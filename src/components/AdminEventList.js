@@ -49,7 +49,7 @@ class AdminEventList extends React.Component {
   }
 
   executeOnClick(isExpanded) {
-    console.log("here")
+    
   }
 
   handleCancelEdit(){

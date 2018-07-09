@@ -7,6 +7,7 @@ import StudioPage from './pages/StudioPage.js';
 import WorkshopPage from './pages/WorkshopPage.js';
 import TheSpacePage from './pages/TheSpacePage.js';
 import Reserve from './components/Reserve.js';
+import LoginPage from './pages/LoginPage.js';
 import GearPage from './pages/GearPage.js';
 import { Router, Route, Link, Switch } from 'react-router-dom';
 import ContactUsPage from './pages/ContactUs.js';
@@ -14,6 +15,7 @@ import history from './components/history.js';
 import './app.css';
 import registerServiceWorker from './registerServiceWorker.js';
 import {Menu, Dropdown} from 'antd';
+import Auth from './components/Auth.js';
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -31,6 +33,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </Menu>
 )
 
+  const auth = new Auth();
+  const handleAuthentication = (nextState, replace) => {
+  if (/access_token|id_token|error/.test(nextState.location.hash)) {
+    auth.handleAuthentication();
+  }
+  }
+
   ReactDOM.render((
    <Router history={history}>
 
@@ -47,18 +56,27 @@ document.addEventListener('DOMContentLoaded', function() {
           RENTAL
         </a>
       </Dropdown>
-      <Link to="/events" className="link  hover-logo-blue black f6 dib mr2 mt4 fr">EXHIBITIONS</Link>
+      <Link to="/events" className="link  hover-logo-blue black f6 dib mr2 mt4 fr">EVENTS</Link>
       <Link to="/workshops" className="link hover-logo-green black f6 dib mr2 mt4 fr">WORKSHOPS</Link>
 
 
 	</div>
   </Menu>
     <Switch>
-    	<Route exact path="/" component={HomePage} />
+    	<Route exact path="/" render={(props)=> (
+        <HomePage auth={auth}/>
+      )} />
+      <Route exact path="/login" render={(props)=> (
+        <LoginPage auth={auth}/>
+      )} />
     	<Route path="/events" component={EventPage} />
       <Route path="/workshops" component={WorkshopPage} />
     	<Route path="/space" component={TheSpacePage} />
       <Route path="/contact" component={ContactUsPage}/>
+      <Route exact path="/admin" render={(props) => (
+        handleAuthentication(props),
+        <AdminPage auth={auth} {...props}/>
+      )}/>
       <Route exact path= "/gear" render={(props) => (
           <GearPage {...props}/>
         )} />

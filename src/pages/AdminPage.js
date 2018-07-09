@@ -4,10 +4,12 @@ import AdminWorkshopList from '../components/AdminWorkshopList.js';
 import CreateEventPage from './CreateEventPage.js';
 import CreateWorkshopPage from './CreateWorkshopPage.js';
 import ErrPage from './ErrPage.js';
+import LoginPage from './LoginPage.js';
 import ReadMePage from './ReadMePage.js';
 import history from '../components/history.js';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SignUpsList from '../components/SignUpsList.js';
+import PropTypes from 'prop-types';
 
 const signupsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/signup"
 const eventsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/events"
@@ -29,7 +31,12 @@ class AdminPage extends React.Component{
         this.createEvent = this.createEvent.bind(this);
         this.createWorkshop = this.createWorkshop.bind(this);
         this.handleEventFileList = this.handleEventFileList.bind(this);
+        this.logOut = this.logOut.bind(this);
     }
+
+  logOut(){
+    this.props.auth.logout()
+  }
 
   sortEvents(events) {
       events.sort(function(a, b) {
@@ -146,6 +153,9 @@ componentDidMount() {
     }
 
 	render(){
+    if(!this.props.auth.isAuthenticated()){
+      return(<LoginPage auth={this.props.auth}/>);
+    }
     if(this.state.err){
       return (<ErrPage/>);
     }
@@ -165,6 +175,9 @@ componentDidMount() {
         <div className="mt10">
         <center>
         <h2 className="avenir fw1 f1-5 mb0 ph0-l">Admin Center</h2>
+        <div className="fr pr3">
+          <a className="f6 link dim br2 ph3 pointer pv1 mb2 dib white bg-dark-blue" onClick={this.logOut}>Logout</a>
+        </div>
         </center>
   		    <Tabs>
               <TabList>
@@ -208,5 +221,9 @@ componentDidMount() {
 	}
 
 }
+AdminPage.propTypes = {
+	 auth: PropTypes.object,
+	 children: PropTypes.node
+};
 
 export default AdminPage;

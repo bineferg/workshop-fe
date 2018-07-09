@@ -27,9 +27,9 @@ class ContactUsPage extends React.Component {
    FirstName: this.state.firstName,
    LastName: this.state.lastName,
    Email: this.state.email,
-   Message: this.state.comment,
+   Message: this.state.comments,
   }
-
+  console.log(payload)
   var url = backendURL
   fetch(url, {
     method: 'POST',
@@ -49,7 +49,7 @@ class ContactUsPage extends React.Component {
    firstName:'',
    lastName:'',
    email: '',
-   comment:'',
+   comments:'',
   });
  };
 
@@ -85,7 +85,7 @@ class ContactUsPage extends React.Component {
    <article className="bg-white cf">
      <div className="vh-75 cover mt5s bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
      <p className="tc f2 mb4 mt5 fw1 avenir ">Contact Us </p>
-     
+
 
   <div className="fl w-67 h-100 bg-near-white">
     <h1 className="f2 mt4 fw1 avenir pl10">Get in Touch</h1>

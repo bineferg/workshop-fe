@@ -33,7 +33,7 @@ class StudioPage extends React.Component {
   <div className="cf col">
   <div className="fl w-67 bg-near-white">
   <div className="mb4 ">
-    <h1 className="pl10 f2 fw1 avenir mt5">Sudio Space</h1>
+    <h1 className="pl10 f2 fw1 avenir mt5">Studio Space</h1>
      <div className="plr5">
       <div className="overflow-auto">
       <table className="f6 w-100 center" cellspacing="0">
