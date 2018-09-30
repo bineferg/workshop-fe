@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon, Form, Input, Button} from 'antd';
+import { Spin} from 'antd';
 import Dropzone from 'react-dropzone';
 import 'antd/dist/antd.css';
 import trashcan from '../assets/trashcan.png';
@@ -35,48 +36,36 @@ class CreateWorkshopPage extends React.Component {
     this.setState({fileList: []})
   }
 
-  putPhotoCall(files, id){
-    return new Promise (() => {
-      fetch(uploadURL + '/workshops/'+ id+'.jpg', {
-        method:'GET',
-      })
-      .then(d => d.json())
-      .then((d) => {
-        fetch(d.url, {
-          method: 'PUT',
-          body: files[0],
-        })
-        .then((response) => {
-          if(response.ok) {
-            console.log("ok")
-          }
-        })
+  makeWorkshop(payload, files) {
+    fetch(uploadURL + '/workshops/' + payload.workshop_id + '.jpg', {
+      method: 'GET',
+    }).then(d => d.json())
+    .then((d) => {
+      fetch(d.url, {
+        method: 'PUT',
+        body: files[0]
+      }).then((response) => {
+        if(response.ok) {
+          fetch(workshopsURL, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(payload)
+          }).then((response) => {
+              if(response.ok){
+                this.setState({
+                  submitSuccess: true,
+                  fetching: false,
+                  })
+              }
+
+          })
+        }
       })
     })
   }
-
-  doServerCall(payload){
-    return new Promise (() => {
-      fetch(workshopsURL, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-        }).then((response) => {
-          if(response.ok) {
-            console.log("ok")
-          }
-        })
-    })
-   }
-
-
-  makeNewWorkshop(payload, files){
-    return Promise.all([this.putPhotoCall(files, payload.workshop_id), this.doServerCall(payload)])
-  }
-
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -95,8 +84,8 @@ class CreateWorkshopPage extends React.Component {
       cap: parseInt(this.state.workshopCap, 10),
       location: defaultLocation,
     }
-      this.makeNewWorkshop(payload, this.state.fileList)
-      this.setState({submitSuccess: true})
+      this.setState({fetching: true})
+      this.makeWorkshop(payload, this.state.fileList)
     }
 
 
@@ -109,25 +98,35 @@ class CreateWorkshopPage extends React.Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
+
+    if(this.state.fetching){
+      return(
+        <div className="mt10 plr5 mb5">
+        <Spin tip="..." size="large">
+        </Spin>
+        </div>
+      )
+    }
+
     if (this.state.submitSuccess){
       return (
       <div>
       <h1 className="plr5 f2 mb4 fw1 avenir mt10">Workshop Published!</h1>
       <br/>
-      <div className="fl mr5 mb5">
-      <a className="ph3 pv2 logo-blue-bg ml3 grow no-underline ba b--black f6" onClick={ () => window.location.reload()}>Admin Center</a>
+      <div className="ml5 mb5">
+      <button className="f6 grow pointer no-underline logo-blue-bg ba ph3 pv2 mb4 mt4 dib near-black" onClick={() => window.location.reload()} >
+      Admin Center
+      </button>
       </div>
       </div>
      )
     }
     return (
       <div className=" pb5 pt6 bg-near-white">
-      <div className="mt10 fl ml3">
-      <a class="f6 link dim br2 ph4 pointer pv2 mb2 dib white bg-black-80" onClick={ () => window.location.reload()}>Admin Center</a>
+      <div className="mt5 fl pl5">
+      <a class="f6 link dim br2 ph4 outline pointer pv2 mb2 dib black bg-white" onClick={ () => window.location.reload()}>Admin Center</a>
       </div>
-      <center>
-      <h2 className="avenir fw1 f1-5 mb0 mr10">Create Workshop</h2>
-      </center>
+      <h2 className="avenir fw1 f1-5 mb0 ml26">Create Workshop</h2>
       <div className="w-80">
 
       <Form onSubmit={this.handleSubmit} className="pa4 pl8">
