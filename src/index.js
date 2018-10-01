@@ -7,8 +7,10 @@ import StudioPage from './pages/StudioPage.js';
 import WorkshopPage from './pages/WorkshopPage.js';
 import TheSpacePage from './pages/TheSpacePage.js';
 import Reserve from './components/Reserve.js';
+import Workshop from './components/Workshop.js';
 import LoginPage from './pages/LoginPage.js';
 import GearPage from './pages/GearPage.js';
+import Eventx from './components/Event.js'
 import { Router, Route, Link, Switch } from 'react-router-dom';
 import ContactUsPage from './pages/ContactUs.js';
 import history from './components/history.js';
@@ -69,8 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
       <Route exact path="/login" render={(props)=> (
         <LoginPage auth={auth}/>
       )} />
-    	<Route path="/events" component={EventPage} />
-      <Route path="/workshops" component={WorkshopPage} />
+      <Route exact path= "/events" render={(props) => (
+          <EventPage {...props}/>
+        )} />
+      <Route exact path="/events/:eventID" component={Eventx}/>
+      <Route exact path= "/workshops" render={(props) => (
+          <WorkshopPage {...props}/>
+        )} />
+      <Route exact path="/workshops/:workshopID" component={Workshop}/>
     	<Route path="/space" component={TheSpacePage} />
       <Route path="/contact" component={ContactUsPage}/>
       <Route exact path="/admin" render={(props) => (

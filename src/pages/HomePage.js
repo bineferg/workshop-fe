@@ -33,7 +33,7 @@ interdisciplinary and experimental art forms.
         <h1 className="fw6 f3 avenir">Writing</h1>
         <p className="lh-copy measure f4 f3-ns black-70 fw1 avenir">
           The Workshop offers a home to the desk-less and the restless writers. In addition to organised and guided workshops, a few hours a week are reserved as „open desk“ time.
-          This communal writing space is home to a strong community of writers who are interested in reading and processnig each other’s work.
+          This communal writing space is home to a strong community of writers who are interested in reading and processing each other’s work.
         </p>
 
       </div>
@@ -43,7 +43,7 @@ interdisciplinary and experimental art forms.
         <p className="lh-copy measure f4 f3-ns black-70 fw1 avenir">
           The audio studio space comes equipped with state of the dj equipment, machine drums, synths, and vintage sound gear. The space is used for independent work as well as larger, curated events and workshops open to the community.
           Open events include workshops in any shape or form that the space can realise, hosting regular female:pressure meet-ups, hosting regular „drop-in“ hours for people who have questions about gear and
-          production, small concerts, and other experimental communial audio exercises.
+          production, small concerts, and other experimental communal audio exercises.
             </p>
 
       </div>

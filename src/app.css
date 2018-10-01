@@ -506,6 +506,9 @@ body {
  .w-100 {
      width: 100%;
 }
+.w-65{
+    width: 65%;
+}
  .w-50 {
      width: 50%;
 }
@@ -561,9 +564,22 @@ body {
     padding-right: 8rem;
     padding-bottom: 8rem;
 }
+.pa10 {
+    padding-left: 15rem;
+    padding-right: 15rem;
+    padding-bottom: 15rem;
+}
 .plr5 {
   padding-left: 8rem;
   padding-right: 8rem;
+}
+.plr6 {
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+.plr7 {
+  padding-left: 15rem;
+  padding-right: 15rem;
 }
 .plr3 {
   padding-left: 3rem;
@@ -575,6 +591,9 @@ body {
  .pb3 {
      padding-bottom: 1.75rem;
 }
+.pb4{
+  padding-bottom: 4rem;
+}
 .pb5 {
     padding-bottom: 4.5rem;
 }
@@ -583,6 +602,9 @@ body {
 }
 .pb10 {
     padding-bottom: 10.75rem;
+}
+.pt2{
+  padding-top: 2rem;
 }
  .ml0 {
      margin-left: 0;
@@ -654,6 +676,11 @@ body {
 .mb10{
   margin-bottom: 8rem;
 }
+
+.mt7-5{
+  margin-top: 4.5rem
+}
+
 .mt8 {
 margin-top: 5.25rem;
 }
@@ -1287,4 +1314,153 @@ margin-top: 2.25rem;
 }
  .react-tabs__tab-panel--selected {
      display: block;
+}
+.bt {
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+.bb {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.b--black-10 {
+    border-color: rgba(0, 0, 0, .1);
+}
+
+.db {
+    display: block;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.avenir {
+    font-family: 'avenir next', avenir, sans-serif;
+}
+
+.baskerville {
+    font-family: baskerville, serif;
+}
+
+.fw1 {
+    font-weight: 100;
+}
+
+.lh-title {
+    line-height: 1.25;
+}
+
+.lh-copy {
+    line-height: 1.5;
+}
+
+.mw7 {
+    max-width: 48rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.black {
+    color: #000;
+}
+
+.pv4 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.ph3 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.mb4 {
+    margin-bottom: 2rem;
+}
+
+.mt0 {
+    margin-top: 0;
+}
+
+.mv0 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.f3 {
+    font-size: 1.5rem;
+}
+
+.f6 {
+    font-size: .875rem;
+}
+
+.center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.dim {
+    opacity: 1;
+    transition: opacity .15s ease-in;
+}
+
+.dim:hover, .dim:focus {
+    opacity: .5;
+    transition: opacity .15s ease-in;
+}
+
+.dim:active {
+    opacity: .8;
+    transition: opacity .15s ease-out;
+}
+
+@media screen and (min-width: 30em) {
+    .flex-row-ns {
+        flex-direction: row;
+    }
+
+    .w-40-ns {
+        width: 40%;
+    }
+
+    .w-60-ns {
+        width: 60%;
+    }
+
+    .pl3-ns {
+        padding-left: 1rem;
+    }
+
+    .pr3-ns {
+        padding-right: 1rem;
+    }
+
+    .mb0-ns {
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (min-width: 60em) {
+    .ph0-l {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .f5-l {
+        font-size: 1rem;
+    }
 }
