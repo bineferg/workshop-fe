@@ -1,12 +1,16 @@
 import React from 'react';
 import SignUpModal from '../components/SignUpModal.js';
+import history from '../components/history.js';
 import RegisterForm from '../components/RegisterForm.js';
+import PropTypes from 'prop-types';
+import {Route, Link} from 'react-router-dom';
 
 class EventList extends React.Component {
-	constructor() {
-		super();
-    	this.state = {isOpen: false, name: "", id: ""};
+	constructor(props) {
+		super(props);
+    	this.state = {isOpen: false, name: "", id: "", clicked: this.props.clicked};
 			this.handleParagraphs = this.handleParagraphs.bind(this);
+			history.push('/events');
 	}
 
   toggleModal = (name, id, isFull) => {
@@ -24,33 +28,42 @@ class EventList extends React.Component {
 			})
 		}
 
-
-	renderItem(d) {
+	renderItem(d){
 		var imgName="https://workshop-objects-1.s3.amazonaws.com/events/"+d.id+".jpg"
 		return(
-			<article className="bt bb b--black-10 db pv4 no-underline black">
-				<div className="w-100">
-					<div className="mb4 mb0-ns w-100">
-						<img src={imgName} className="db center eventImg mb4"></img>
-						</div>
-				<div className="w-100">
-				<h1 className="f3 fw1 tc avenir w-90 mt0 lh-title">{d.name}</h1>
-				<div className="f6 f5-l center w-90 lh-copy">
-					{this.handleParagraphs(d.description)}
+			<Link to={{
+				pathname: `/events/${d.id}`,
+				state: {
+					 name: d.name,
+					 description: d.description,
+					 img:imgName,
+					 location:d.location,
+					 cost:d.cost,
+					 time:d.time
+				 }
+			 }} className="db link dim">
+  <article class="bt bb b--black-10">
+    <a class="db pv4 ph3 ph0-l no-underline black dim" href="#0">
+      <div class="flex flex-column flex-row-ns">
+        <div class="mb4 mb0-ns w-33">
+          <img src={imgName} class="db w-100" alt="Photo of a dimly lit room with a computer interface terminal."/>
+					<div class="mt4">
+					<p class="f6 lh-copy mv0 ml2 b">{d.cost}</p>
+					<p class="f6 lh-copy mv0 ml2 b">{d.time}</p>
+					</div>
 				</div>
-				<p className="f6 b ml2s f5-l lh-copy w-90 mv0">{d.location}</p>
-				<p className="f6 b ml2s lh-copy w-90 mv0">Price: {d.cost}
-				</p>
-				<div className="f6 b ml2s lh-copy w-90 mb4 mt0 measure-narrow">Time: {d.time}
-				</div>
-				</div>
-				</div>
-				</article>
+        <div class="w-100 w-60-ns ml3">
+          <h1 class="f3 fw1 mt0 lh-title">{d.name}</h1>
+          <p class="f6 f5-l lh-copy">
+            {this.handleParagraphs(d.caption)}
+          </p>
 
-		      );
-
-		}
-
+        </div>
+      </div>
+    </a>
+  </article>
+	</Link>
+	)}
 render() {
 
 	return (
@@ -66,5 +79,8 @@ render() {
 }
 
 }
+EventList.propTypes = {
+	 clicked: PropTypes.bool,
+};
 
 export default EventList;
