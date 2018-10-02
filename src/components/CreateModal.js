@@ -19,10 +19,8 @@ class CreateModal extends React.Component {
 	handleClickOutside(event) {
 		if(event.target.className == "backdrop") {
 			return this.props.onClose(event);
-		} 
+		}
 	}
-
-
 
 	render() {
 		if(!this.props.show) {
@@ -39,8 +37,8 @@ class CreateModal extends React.Component {
 			backgroundColor: 'rgba(0,0,0,0.3)',
 			padding: 50
 		};
-			
-					// The modal "window"
+
+		// The modal "window"
 		const modalStyle = {
 			backgroundColor: '#fff',
 			borderRadius: 5,
@@ -56,7 +54,7 @@ class CreateModal extends React.Component {
 				{this.props.children}
 				</div>
 				</div>
-		       );
+		);
 	}
 }
 

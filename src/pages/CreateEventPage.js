@@ -36,45 +36,6 @@ class CreateEventPage extends React.Component {
     this.setState({fileList: []})
   }
 
-  putPhotoCall(files, id){
-    const request = async () => {
-    const response = await fetch(uploadURL + '/events/'+ id+'.jpg', {
-      method:'GET',
-    })
-    var d = await response.json()
-    console.log(d)
-    const response2 = await(fetch(d.url), {
-      method: 'PUT',
-      body: files[0]
-    })
-    var d2 = await response.json()
-    if (response.ok){
-      console.log("ok")
-    }
-  }
-  request()
-  }
-
-
-  doServerCall(payload){
-    const request = async () => {
-    const response = await fetch(eventsURL, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-        })
-    var json = await response.json()
-    if(response.ok){
-      console.log("ok")
-    }
-
-   }
-    request()
- }
-
   makeEvent(payload, files) {
     fetch(uploadURL + '/events/' + payload.id + '.jpg', {
       method: 'GET',
@@ -121,6 +82,7 @@ class CreateEventPage extends React.Component {
     time : this.state.eventTimes,
     cost: this.state.eventCost,
     location: defaultLocation,
+    caption: this.state.caption,
   }
   this.setState({fetching: true})
   this.makeEvent(payload, this.state.fileList)
@@ -173,6 +135,9 @@ class CreateEventPage extends React.Component {
         </FormItem>
         <FormItem label="Event Description" name="description" required="true">
             <TextArea placeholder="Use [p] to delineate paragraphs!" autosize={{ minRows: 8, maxRows: 1000 }} onChange={this.handleChange} name="description"/>
+        </FormItem>
+        <FormItem label="Event Caption" name="caption" required="true">
+            <TextArea placeholder="Max character count: 400" maxlength="400" autosize={{ minRows: 4, maxRows: 10 }} onChange={this.handleChange} name="caption"/>
         </FormItem>
         <FormItem label="Event Times" required="true" >
           <Input name="eventTimes" placeholder="Time of event" required="true" onChange={this.handleChange} />

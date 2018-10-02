@@ -277,7 +277,19 @@ class AdminWorkshopList extends React.Component {
           </div>
           </article>
           <article className="dt w-100 bb b--black-05 pb2 mt2">
-
+          <div className="dtc">
+          <h1 className="f6 f5-ns fw6 lh-title black ">Caption </h1>
+            <TextArea
+              onKeyDown={ this.handleEditField }
+              autosize={{ maxRows: 10 }}
+              maxlength="400"
+              type="text"
+              className="f6 mb2 mr5"
+              ref={ `title_${ d.Caption }` }
+              name="Caption"
+              defaultValue={ d.Caption }
+            />
+          </div>
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black ">Description </h1>
             <TextArea
@@ -331,6 +343,19 @@ class AdminWorkshopList extends React.Component {
        <div className="dtc  pl2">
          <h1 className="f6 f5-ns fw6 lh-title black ">Title</h1>
          <h2 className="f6 fw4 mt0 mb0 black-60">{d.Name}</h2>
+       </div>
+       <div className="dtc pl2">
+         <h1 className="f6 f5-ns fw6 lh-title black ">Caption </h1>
+         <h2 className="f6 fw4 mt0 mb0 black-60">
+         <ShowMoreText
+               lines={3}
+               more='Show more'
+               less='Show less'
+               anchorClass=''
+               onClick={this.executeOnClick(true)}>
+               {d.Caption}
+         </ShowMoreText>
+         </h2>
        </div>
        <div className="dtc pl2">
          <h1 className="f6 f5-ns fw6 lh-title black ">Description </h1>

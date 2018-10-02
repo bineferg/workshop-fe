@@ -81,6 +81,7 @@ class CreateWorkshopPage extends React.Component {
       description: this.state.description,
       time : this.state.workshopTimes,
       cost: this.state.workshopCost,
+      caption: this.state.caption,
       cap: parseInt(this.state.workshopCap, 10),
       location: defaultLocation,
     }
@@ -132,6 +133,9 @@ class CreateWorkshopPage extends React.Component {
       <Form onSubmit={this.handleSubmit} className="pa4 pl8">
         <FormItem label="Workshop Name" required="true" >
           <Input name="workshopName" placeholder="Title of Workshop" required="true" onChange={this.handleChange} />
+        </FormItem>
+        <FormItem label="Workshop Caption" name="caption" required="true">
+            <TextArea placeholder="Max character count: 400" maxlength="400" autosize={{ minRows: 4, maxRows: 10 }} onChange={this.handleChange} name="caption"/>
         </FormItem>
         <FormItem label="Workshop Description" name="description" required="true">
             <TextArea placeholder="Use [p] to delineate paragraphs!" autosize={{ minRows: 8, maxRows: 1000 }} onChange={this.handleChange} name="description"/>

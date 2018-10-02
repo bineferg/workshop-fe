@@ -49,7 +49,7 @@ class AdminEventList extends React.Component {
   }
 
   executeOnClick(isExpanded) {
-    
+
   }
 
   handleCancelEdit(){
@@ -249,6 +249,19 @@ class AdminEventList extends React.Component {
           </div>
           </article>
           <article className="dt w-100 bb b--black-05 pb2 mt2">
+          <div className="dtc">
+          <h1 className="f6 f5-ns fw6 lh-title black ">Caption </h1>
+            <TextArea
+              onKeyDown={ this.handleEditField }
+              autosize={{ maxRows: 10 }}
+              maxlength="400"
+              type="text"
+              className="f6 mb2 mr5"
+              ref={ `title_${ d.caption }` }
+              name="caption"
+              defaultValue={ d.caption }
+            />
+          </div>
 
           <div className="dtc">
           <h1 className="f6 f5-ns fw6 lh-title black ">Description </h1>
@@ -303,6 +316,19 @@ class AdminEventList extends React.Component {
        <div className="dtc  pl2">
          <h1 className="f6 f5-ns fw6 lh-title black ">Title</h1>
          <h2 className="f6 fw4 mt0 mb0 black-60">{d.name}</h2>
+       </div>
+       <div className="dtc pl2">
+         <h1 className="f6 f5-ns fw6 lh-title black ">Caption </h1>
+         <h2 className="f6 fw4 mt0 mb0 black-60">
+         <ShowMoreText
+               lines={3}
+               more='Show more'
+               less='Show less'
+               anchorClass=''
+               onClick={this.executeOnClick(true)}>
+               {d.caption}
+         </ShowMoreText>
+         </h2>
        </div>
        <div className="dtc pl2">
          <h1 className="f6 f5-ns fw6 lh-title black ">Description </h1>

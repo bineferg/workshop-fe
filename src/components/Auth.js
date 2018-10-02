@@ -8,6 +8,8 @@ export default class Auth {
     redirectUri: 'http://www.workshop-on-forster.de/admin',
     responseType: 'token id_token'
   });
+
+
   constructor() {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -19,6 +21,7 @@ export default class Auth {
   login() {
     this.auth0.authorize();
   }
+  
   handleAuthentication() {
    this.auth0.parseHash((err, authResult) => {
      if (authResult && authResult.accessToken && authResult.idToken) {

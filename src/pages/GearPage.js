@@ -109,24 +109,19 @@ class GearPage extends React.Component {
        </Link>
      </div>
    );
-
  }
 
  render(){
-
    return (
      <article className="db">
       <h2 className="avenir fw1 mt10 tc f1-5 mb2">Rental Gear </h2>
-        <div className="cf pa5">
+        <div className="cf center mw7">
           {gear.map((item) => this.getCard(item))}
         </div>
      </article>
 
    );
-
-
- }
-
+  }
 }
 
 GearPage.propTypes = {
