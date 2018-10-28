@@ -18,6 +18,7 @@ import './app.css';
 import registerServiceWorker from './registerServiceWorker.js';
 import {Menu, Dropdown} from 'antd';
 import Auth from './components/Auth.js';
+import Language from './components/Language.js';
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -35,20 +36,23 @@ document.addEventListener('DOMContentLoaded', function() {
   </Menu>
 )
 
+  const lang = new Language()
+
   const auth = new Auth();
   const handleAuthentication = (nextState, replace) => {
   if (/access_token|id_token|error/.test(nextState.location.hash)) {
     auth.handleAuthentication();
-  }
+    }
   }
 
   ReactDOM.render((
    <Router history={history}>
-
     <div className="avenir">
      <Menu>
      <div className="tc main-nav sticky">
-
+     <Language/>
+     <div className="mr2 fw1 f6 mt4  fr link hover-logo-blue pointer" onClick={() => {lang.setLang("de")}} > | DE </div>
+     <div className="fr fw1 f6 mt4  link underline hover-logo-blue pointer" onClick={() => {lang.setLang("en")}}>EN</div>
     <Link to="/" className="no-underline avier black fl"><p className="f-home pl2 f2 fw1 mt0 mb0">WORKSHOP</p>
     </Link>
       <Link to="/contact" className="link  hover-logo-blue black f6 dib mr2 mt4 fr">CONTACT US</Link>
@@ -60,13 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
       </Dropdown>
       <Link to="/events" className="link  hover-logo-blue black f6 dib mr2 mt4 fr">EVENTS</Link>
       <Link to="/workshops" className="link hover-logo-green black f6 dib mr2 mt4 fr">WORKSHOPS</Link>
-
-
 	</div>
   </Menu>
+
     <Switch>
     	<Route exact path="/" render={(props)=> (
-        <HomePage auth={auth}/>
+        <HomePage auth={auth} lang={lang}/>
       )} />
       <Route exact path="/login" render={(props)=> (
         <LoginPage auth={auth}/>
@@ -80,7 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
         )} />
       <Route exact path="/workshops/:workshopID" component={Workshop}/>
     	<Route path="/space" component={TheSpacePage} />
-      <Route path="/contact" component={ContactUsPage}/>
+      <Route exact path="/contact" render={(props) => (
+        <ContactUsPage lang={lang}/>
+      )}/>
       <Route exact path="/admin" render={(props) => (
         handleAuthentication(props),
         <AdminPage auth={auth} {...props}/>

@@ -1,0 +1,21 @@
+{
+	"home": {
+		"sub_header": "A space for communal, open source, autodidactic learning for those curious in interdisciplinary and experimental art forms.",
+		"film_and_photo": {
+			"title": "Film and Photography",
+			"sub_text": "The Workshop offers a fully equipped photo lab with analog and digital cameras as well as projectors for reel and digital screenings. Film and photo events include screenings and discussions, workshops, and photography shows in our gallery space."
+		},
+		"writing": {
+			"title": "Writing",
+			"sub_text": "The Workshop offers a home to the desk-less and the restless writers. In addition to organised and guided workshops, a few hours a week are reserved as „open desk“ time. This communal writing space is home to a strong community of writers who are interested in reading and processing each other’s work."
+		},
+		"music": {
+			"title": "Music",
+			"sub_text": "The audio studio space comes equipped with state of the dj equipment, machine drums, synths, and vintage sound gear. The space is used for independent work as well as larger, curated events and workshops open to the community. Open events include workshops in any shape or form that the space can realise, hosting regular female:pressure meet-ups, hosting regular „drop-in“ hours for people who have questions about gear and production, small concerts, and other experimental communal audio exercises."
+		}
+	},
+  "contact":{
+    "title": "Contact Us",
+    "sub_title": "Get in Touch"
+  }
+}

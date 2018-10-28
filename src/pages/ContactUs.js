@@ -3,6 +3,8 @@ import history from '../components/history.js';
 import tableLamp from '../assets/table-lamp.jpg';
 import ErrPage from '../pages/ErrPage.js';
 import { DatePicker, Icon, Form, Input, TimePicker, Checkbox } from 'antd';
+import en from '../languages/en.json';
+import de from '../languages/de.json';
 
 const backendURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/mail"
 const FormItem = Form.Item;
@@ -10,16 +12,23 @@ const { TextArea } = Input;
 class ContactUsPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    console.log(this.props.lang)
+    this.state = {language: this.props.lang};
     history.push('/contact')
  }
  handleChange = (e) => {
   let newState = {};
-
   newState[e.target.name] = e.target.value;
-
   this.setState(newState);
  };
+
+ getContactUsHeader(){
+   if(this.props.lang === "en") {
+     return <p>{en.contact.title}</p>
+   } else {
+     return <p>{de.contact.title}</p>
+   }
+ }
 
  handleSubmit = (e, comment) => {
   e.preventDefault();
@@ -62,7 +71,7 @@ class ContactUsPage extends React.Component {
      return(
        <article className="bg-white cf">
          <div className="vh-75 cover mt5s bg-center" style={{backgroundImage: `url(${tableLamp})`}}></div>
-         <p className="tc f2 mb4 fw1 avenir ">Contact Us </p>
+         <p className="tc f2 mb4 fw1 avenir ">{this.getContactUsHeader()}</p>
          <div className="fl w-67 bg-near-white pb3 vh-100">
            <h1 className="plr5 f2 mb4 fw1 avenir mt10">Thanks for your inquiry, we will get back to you shortly!</h1>
          </div>

@@ -1,0 +1,21 @@
+{
+	"home": {
+		"sub_header": "Ein Raum für gemeinschaftliches, quelloffenes, autodidaktisches Lernen für Neugierige in interdisziplinären und experimentellen Kunstformen.",
+		"film_and_photo": {
+			"title": "Film und Fotografie",
+			"sub_text": "Der Workshop bietet ein voll ausgestattetes Fotolabor mit analogen und digitalen Kameras sowie Projektoren für Rollen- und Digitalvorführungen. Film- und Foto-Events beinhalten Vorführungen und Diskussionen, Workshops und Foto-Shows in unserem Galerieraum."
+		},
+		"writing": {
+			"title": "Schreiben",
+			"sub_text": "Der Workshop bietet den Schreibtischlosen und den ruhelosen Schriftstellern ein Zuhause. Neben organisierten und geführten Workshops sind einige Stunden pro Woche als “Open Desk” -Zeit reserviert. Dieser kommunale Schreibraum beherbergt eine starke Gemeinschaft von Schriftstellern, die daran interessiert sind, die Arbeit des jeweils anderen zu lesen und zu bearbeiten."
+		},
+		"music": {
+			"title": "Musik",
+			"sub_text": "Der Audio Studio Raum ist ausgestattet mit State of the DJ Equipment, Maschinen Drums, Synths und Vintage Sound Equipment. Der Raum wird für selbstständige Arbeit sowie für größere, kuratierte und der Öffentlichkeit zugängliche Veranstaltungen genutzt. Offene Veranstaltungen umfassen Workshops in jeder Form und Form, die der Raum verwirklichen kann. Regelmäßige femail:pressure, regelmäßige *Drop - in* -Stunden für Leute, die Fragen zu Ausrüstung und Produktion haben, kleine Konzerte und andere experimentelle Gemeinschaftsaudien Übungen."
+		}
+	},
+  "contact":{
+    "title": "Kontakt",
+    "sub_title": "In Kontakt kommen"
+  }
+}
