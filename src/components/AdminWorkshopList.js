@@ -150,6 +150,10 @@ class AdminWorkshopList extends React.Component {
           payload.description = field["Description"]
           continue
         }
+        if (field["Caption"]){
+          payload.caption = field["Caption"]
+          continue
+        }
         if (field["Cost"]){
           payload.cost=field["Cost"]
           continue

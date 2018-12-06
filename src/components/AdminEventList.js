@@ -123,6 +123,7 @@ class AdminEventList extends React.Component {
         description: item.description,
         cost: item.cost,
         time: item.time,
+        caption: item.caption,
         location: item.location,
       }
 
@@ -143,6 +144,10 @@ class AdminEventList extends React.Component {
         }
         if (field["time"]){
           payload.time=field["time"]
+          continue
+        }
+        if (field["caption"]){
+          payload.caption=field["caption"]
           continue
         }
 

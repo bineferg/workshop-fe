@@ -25,6 +25,7 @@ class CreateEventPage extends React.Component {
   handleChange = (e) => {
    let newState = {};
    newState[e.target.name] = e.target.value;
+   console.log(newState);
    this.setState(newState);
   };
 
@@ -37,6 +38,7 @@ class CreateEventPage extends React.Component {
   }
 
   makeEvent(payload, files) {
+    console.log("payload", payload)
     fetch(uploadURL + '/events/' + payload.id + '.jpg', {
       method: 'GET',
     }).then(d => d.json())
