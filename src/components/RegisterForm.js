@@ -48,29 +48,28 @@ handleSubmit = (e, message) => {
 		body: JSON.stringify(payload)
 		}).then((response) => {
   			if (response.ok) {
-				this.setState({registerSuccess: true})
+          fetch(backendURL + '/' + this.props.id, {
+            method: 'POST',
+            headers: {
+      		      'Accept': 'application/json',
+      		      'Content-Type': 'application/json',
+      		  },
+            body: JSON.stringify(payload)
+          }).then((response) => {
+        			if (response.ok) {
+      				      this.setState({registerSuccess: true})
+                    return
+        			}
+      		})
+          .catch(function(error){
+            console.log('Request failed', error);
+            return;
+          });
   			}
 		}).catch (function (error) {
 			console.log('Request failed', error);
 			return;
 		});
-
-    fetch(backendURL + '/' + this.props.id, {
-    method: 'POST',
-    headers: {
-		'Accept': 'application/json',
-		'Content-Type': 'application/json',
-		},
-    body: JSON.stringify(payload)
-    }).then((response) => {
-  			if (response.ok) {
-				this.setState({registerSuccess: true})
-  			}
-		})
-    .catch(function(error){
-      console.log('Request failed', error);
-      return;
-    });
 
  this.setState({
   firstName:'',
