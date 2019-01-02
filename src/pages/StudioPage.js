@@ -71,7 +71,7 @@ class StudioPage extends React.Component {
     <div className="w-25 w-50-ns fl">
       <p className="fw1 f4-m f5-l lh-copy measure mt0">
       <ul> Projector Screen</ul>
-      <ul> Sautering Tools </ul>
+      <ul> Soldering Tools </ul>
       <ul>  JustIn Cubus 21 (Sub+Satellite Units)</ul>
       <ul>  Native Instruments Maschine Studio Groove Production Studio </ul>
       <ul>  Native Instruments, Komplete Audio 6</ul>
