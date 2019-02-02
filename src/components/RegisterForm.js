@@ -33,8 +33,10 @@ handleChange = (e) => {
 handleSubmit = (e, message) => {
  e.preventDefault();
  var optionalComment = ""
- if (this.state.comments===""){
+ if (!this.state.comments){
    optionalComment = "(no comment)"
+ } else {
+   optionalComment = this.state.comments
  }
  var msg = "For Workshop: "+ this.props.name+ "\n Comment: "+ optionalComment
  var payload = {
