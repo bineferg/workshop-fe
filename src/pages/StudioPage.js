@@ -71,7 +71,7 @@ class StudioPage extends React.Component {
     <div className="w-25 w-50-ns fl">
       <p className="fw1 f4-m f5-l lh-copy measure mt0">
       <ul> Projector Screen</ul>
-      <ul> Soldering Tools </ul>
+      <ul> Sautering Tools </ul>
       <ul>  JustIn Cubus 21 (Sub+Satellite Units)</ul>
       <ul>  Native Instruments Maschine Studio Groove Production Studio </ul>
       <ul>  Native Instruments, Komplete Audio 6</ul>
@@ -82,23 +82,26 @@ class StudioPage extends React.Component {
       </p>
     </div>
   </div>
-  <p className="plr5 fw4"> To reserve workshoping or studio space
-  <span onClick={this.onClick} className="cursor link blue"> get in touch </span> with us! </p>
+
   </div>
 
   </div>
   <div className="fl w-33 bg-light-gray tc">
-    <div className="mt10">
-      <h1 className="plr5 f3 mt5 fw3 avenir">10 Hrs per Month</h1>
-      <p className="mb2">40€ per Month</p>
-      <h1 className="plr5 f3 mt5 fw3 avenir">25 Hrs per Month</h1>
-      <p className="mb2">60€ per Month</p>
-      <h1 className="plr5 f3 mt5 fw3 avenir">Unlimitted Studio Time</h1>
-      <p className="mb2">90€ per Month</p>
-      <h1 className="plr5 f3 mt5 fw3 avenir">Already a member?</h1>
+    <div className="mt7">
+    <h1 className="plr5 f3 mt5 mb2 fw3 avenir">Rates and Requests</h1>
+      <h1 className="plr5 f3 mt5 fw3 avenir">10,00 €</h1>
+      <p className="mb2">First Hour</p>
+      <h1 className="plr5 f3 mt5 fw3 avenir">7,00 €</h1>
+      <p className="mb2">Second Hour</p>
+      <h1 className="plr5 f3 mt5 fw3 avenir">30,00 €</h1>
+      <p className="mb2">For Workshops and Community Events</p>
+      <h1 className="plr5 f3 mt5 fw3 avenir">Commercial Events</h1>
 
-      <p className="mb2 plr3">Please schedule your time with our shared calendar, feel free to
-      <span onClick={this.onClick} className="cursor link blue"> contact us </span> should you run into any issues</p>
+      <p className="mb2 plr3">Commercial event rates are available on
+      <span onClick={this.onClick} className="cursor link blue"> inquiry</span>.</p>
+      <p className="plr3 fw6 mt10"> *To reserve workshoping or studio space
+      <span onClick={this.onClick} className="cursor link blue"> get in touch </span> with us!* </p>
+
 
       </div>
     </div>

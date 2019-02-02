@@ -15,7 +15,8 @@ constructor() {
   this.state = {
    firstName: '',
    lastName:'',
-   email: ''
+   email: '',
+   comments:'',
 
   }
  }
@@ -31,7 +32,11 @@ handleChange = (e) => {
 
 handleSubmit = (e, message) => {
  e.preventDefault();
- var msg = "For Workshop: "+ this.props.name+ "\n Comment: "+ this.state.comments
+ var optionalComment = ""
+ if (this.state.comments===""){
+   optionalComment = "(no comment)"
+ }
+ var msg = "For Workshop: "+ this.props.name+ "\n Comment: "+ optionalComment
  var payload = {
   FirstName: this.state.firstName,
   LastName: this.state.lastName,
@@ -51,32 +56,23 @@ handleSubmit = (e, message) => {
           fetch(backendURL + '/' + this.props.id, {
             method: 'POST',
             headers: {
-      		      'Accept': 'application/json',
-      		      'Content-Type': 'application/json',
-      		  },
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            },
             body: JSON.stringify(payload)
-          }).then((response) => {
-        			if (response.ok) {
-      				      this.setState({registerSuccess: true})
-                    return
-        			}
-      		})
-          .catch(function(error){
-            console.log('Request failed', error);
-            return;
-          });
-  			}
-		}).catch (function (error) {
-			console.log('Request failed', error);
-			return;
-		});
-
- this.setState({
-  firstName:'',
-  lastName:'',
-  email: '',
-  comments:'',
- });
+            }).then((response) => {
+              if (response.ok) {
+                this.setState({
+                  registerSuccess: true,
+                  firstName:'',
+                  lastName:'',
+                  email: '',
+                  comments:'',
+              })
+          }
+        })
+      }
+    })
 };
 
 render() {
@@ -119,8 +115,8 @@ render() {
        </FormItem>
      </div>
      <div className="f6 db ml3">
-       <FormItem label="Special Requests" name="comments">
-           <TextArea placeholder="Please let us know any of special accommodations. (Optional)" autosize={{ minRows: 4, maxRows: 100 }} onChange={this.handleChange} name="comments"/>
+       <FormItem label="Special Requests">
+           <TextArea placeholder="Please let us know any of special accommodations. (Optional)" name="comments" autosize={{ minRows: 4, maxRows: 100 }} onChange={this.handleChange}/>
        </FormItem>
      </div>
      <div>

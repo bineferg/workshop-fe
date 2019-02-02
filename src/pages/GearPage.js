@@ -55,7 +55,7 @@ const gear = [
   {
     id:"pcdj",
     title: "PIONEER CDJ-2000NXS2 (x2)",
-    price: "50 €/day",
+    price: "70 €/day",
     img: cdj,
     description: "These CDJs have 96 kHz/24-bit digital signal processing and sound card. There are 8 hot cues, MIDI Control, Audio Standby, DJPro Link, 1 Digital and 1 Analogue output and 2 USB ports."
 
