@@ -48,7 +48,7 @@ class Reserve extends React.Component {
   handleSubmit(e){
     e.preventDefault();
 
-    var msg = "Rental Inquiry: "+ this.props.location.state.name + "\n Details: "+ this.state.comments
+    var msg =  "Details: "+ this.state.comments
               +"\n Pickup: "+this.state.pickupDate+" "+this.state.pickupTime +
               "\n Drop Off: "+this.state.dropoffDate + " "+ this.state.dropoffTime+"\n";
     var payload = {
@@ -56,6 +56,7 @@ class Reserve extends React.Component {
         LastName: this.state.lastName,
         Email: this.state.email,
         Message: msg,
+        Subject: "Rental Inquiry: "+ this.props.location.state.name,
     }
 
     var url = backendURL;

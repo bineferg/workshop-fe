@@ -63,7 +63,7 @@ const gear = [
   {
     id:"piset",
     title: "Pioneer Set",
-    price: "65 €/day",
+    price: "85 €/day",
     img: pionset,
     description: "Inclues 2 Pioneer CDJ-2000 NXS2 and the Pioneer DJM-900 Nexus. All cables and adaptors needed included in the rental price."
 

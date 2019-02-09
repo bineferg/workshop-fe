@@ -32,18 +32,13 @@ handleChange = (e) => {
 
 handleSubmit = (e, message) => {
  e.preventDefault();
- var optionalComment = ""
- if (!this.state.comments){
-   optionalComment = "(no comment)"
- } else {
-   optionalComment = this.state.comments
- }
- var msg = "For Workshop: "+ this.props.name+ "\n Comment: "+ optionalComment
+
  var payload = {
   FirstName: this.state.firstName,
   LastName: this.state.lastName,
   Email: this.state.email,
-  Message: msg,
+  Subject: "Sign Up: "+ this.props.name,
+  Message: this.state.comments,
  }
 
 	fetch(mailURL, {
