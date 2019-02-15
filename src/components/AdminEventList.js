@@ -9,7 +9,7 @@ const uploadURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/
 const FormItem = Form.Item;
 const { TextArea } = Input;
 const imageURL = "https://workshop-objects-1.s3.amazonaws.com/events/";
-const defaultLocation = "ForsterStrasse 51"
+const defaultLocation = "Forster Strasse 51"
 
 class AdminEventList extends React.Component {
   constructor(props) {

@@ -10,7 +10,7 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 const workshopsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/workshops"
 const uploadURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/upload"
-const defaultLocation = "ForsterStrasse 51"
+const defaultLocation = "Forster Strasse 51"
 
 
 class CreateWorkshopPage extends React.Component {

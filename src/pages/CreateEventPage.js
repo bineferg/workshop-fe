@@ -11,7 +11,7 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 const eventsURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/events"
 const uploadURL = "http://ec2-18-217-98-55.us-east-2.compute.amazonaws.com:8000/upload"
-const defaultLocation = "ForsterStrasse 51"
+const defaultLocation = "Forster Strasse 51"
 
 class CreateEventPage extends React.Component {
   constructor(props){

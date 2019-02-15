@@ -16,7 +16,7 @@ constructor() {
    firstName: '',
    lastName:'',
    email: '',
-   comments:'',
+   comments:''
 
   }
  }
@@ -38,7 +38,7 @@ handleSubmit = (e, message) => {
   LastName: this.state.lastName,
   Email: this.state.email,
   Subject: "Sign Up: "+ this.props.name,
-  Message: this.state.comments,
+  Message: this.state.comments
  }
 
 	fetch(mailURL, {
@@ -64,7 +64,7 @@ handleSubmit = (e, message) => {
                   firstName:'',
                   lastName:'',
                   email: '',
-                  comments:'',
+                  comments:''
               })
           }
         })
