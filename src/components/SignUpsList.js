@@ -20,7 +20,6 @@ class SignUpsList extends React.Component {
 
     }
     renderItem(item) {
-      console.log(item.WorkshopName)
       if(!item.SignUps){
         return;
       }

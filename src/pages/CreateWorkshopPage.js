@@ -69,10 +69,9 @@ class CreateWorkshopPage extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state.fileList)
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log('Received values of form: ', values, err);
       }
     });
     var payload = {

@@ -29,7 +29,6 @@ class ContactUsPage extends React.Component {
    Email: this.state.email,
    Message: this.state.comments,
   }
-  console.log(payload)
   var url = backendURL
   fetch(url, {
     method: 'POST',
@@ -53,8 +52,7 @@ class ContactUsPage extends React.Component {
   });
  };
 
-
- render(){
+render(){
    if(this.state.err){
      return (<ErrPage/>);
    }

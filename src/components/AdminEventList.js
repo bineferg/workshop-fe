@@ -32,7 +32,7 @@ class AdminEventList extends React.Component {
       e.stopPropagation();
       var fileListMap = this.state.fileListMap;
       fileListMap[id] = [];
-      this.setState({filListMap: fileListMap})
+      this.setState({fileListMap: fileListMap})
     }
 
   handlePhotoChange = (files, id) => {
@@ -75,14 +75,16 @@ class AdminEventList extends React.Component {
   }
   putPhotoCall(files, id){
     if(!this.state.fileChanged){
-      this.setState({photoCall: true})
+      this.setState({photoCall: true});
+      return Promise.resolve();
     }
     return new Promise (() => {
-      fetch(uploadURL + '/workshops/'+ id+'.jpg', {
+      fetch(uploadURL + '/events/'+ id+'.jpg', {
           method:'GET',
         })
-        .then(d => d.json())
         .then((d) => {
+          return d.json();
+        }).then((d) => {
           fetch(d.url, {
             method: 'PUT',
             body: files[0]
@@ -154,7 +156,6 @@ class AdminEventList extends React.Component {
       }
       payload.location = item.location
       payload.id = item.id
-
     this.doAllUpdates(payload, this.state.fileListMap[payload.id])
     .then(([photoResp, payloadResp]) =>{
     })
@@ -291,7 +292,7 @@ class AdminEventList extends React.Component {
                 {fileList.map((file) =>
                     <div>
                     <img src={trashcan} className="uploadImgRm trashIcon" onClick={(e) => this.removePhoto(e, d.id)}/>
-                      <img src={this.handlePreview(file)} className="uploadBoxPreview" />
+                    <img src={this.handlePreview(file)} className="uploadBoxPreview" />
 
                     </div>)}
                 </div>
@@ -382,8 +383,13 @@ class AdminEventList extends React.Component {
       this.setState({deleted: false})
     }
     if(this.state.photoCall && this.state.serverCall){
-      this.setState({updateSuccess: false, photoCall: false, severCall: false, fileChanged: false})
-      window.location.reload();
+      this.setState({
+        updateSuccess: false,
+        photoCall: false,
+        serverCall: false,
+        fileChanged: false,
+        editing: false,
+      })
     }
 
     return (
