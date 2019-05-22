@@ -21,8 +21,6 @@ class EventPage extends React.Component {
    events.sort(function(a, b) {
        a = new Date(a.createdAt);
        b = new Date(b.createdAt);
-       console.log(a.CreatedAt)
-       console.log(b.CreatedAt)
        return a>b ? -1 : a<b ? 1 : 0;
    });
    return events;

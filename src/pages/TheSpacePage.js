@@ -111,7 +111,6 @@ class TheSpacePage extends React.Component {
           if (width >= 1824){
             columns = 4;
           }
-          console.log(columns);
           return <div ref={measureRef}><Gallery photos={photos} margin="3" columns={columns} onClick={this.openLightbox} />
           <Lightbox images={photos}
             onClose={this.closeLightbox}

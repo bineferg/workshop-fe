@@ -55,7 +55,6 @@ class AdminWorkshopList extends React.Component {
       this.setState({
         deleting: true
       })
-      console.log(id)
       fetch(workshopURL + '?workshop_id=' + id, {
       method: 'delete',
       headers: {
@@ -136,13 +135,10 @@ class AdminWorkshopList extends React.Component {
         time: item.Time,
         location: item.Location,
       }
-      console.log(this.state.updated.length)
       for(var i=0; i<this.state.updated.length; i++){
-        console.log("in loop")
         var field = this.state.updated[i]
 
         if (field["Name"]){
-          console.log(field["Name"])
           payload.name = field["Name"]
           continue
         }
@@ -172,7 +168,7 @@ class AdminWorkshopList extends React.Component {
 
       this.doAllUpdates(payload, this.state.fileListMap[payload.WorkshopID])
       .then(([photoResp, payloadResp]) =>{
-        console.log(photoResp, payloadResp)
+        console.log("ok")
       })
     }
  }

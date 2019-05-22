@@ -25,7 +25,6 @@ class CreateEventPage extends React.Component {
   handleChange = (e) => {
    let newState = {};
    newState[e.target.name] = e.target.value;
-   console.log(newState);
    this.setState(newState);
   };
 
@@ -38,12 +37,10 @@ class CreateEventPage extends React.Component {
   }
 
   makeEvent(payload, files) {
-    console.log("payload", payload)
     fetch(uploadURL + '/events/' + payload.id + '.jpg', {
       method: 'GET',
     }).then(d => d.json())
     .then((d) => {
-      console.log(d.headers)
       fetch(d.url, {
         method: 'PUT',
         body: files[0]
@@ -71,7 +68,6 @@ class CreateEventPage extends React.Component {
 }
   handleSubmit = (e) => {
   e.preventDefault();
-  console.log(this.state.fileList)
   this.props.form.validateFields((err, values) => {
     if (!err) {
       console.log('Received values of form: ', values);
